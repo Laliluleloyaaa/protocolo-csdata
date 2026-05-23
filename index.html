@@ -434,15 +434,15 @@
         <span class="section-chevron">▼</span>
       </div>
       <div class="section-body">
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Verificar saldo de la cuenta</span><span class="check-note">CO &lt;$50.000 COP | MX &lt;$200 MXN | PE &lt;S/50 → CS puede gestionar</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Confirmar que no hay retiros en estado Waiting/Pending</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Confirmar qué datos solicita actualizar</span><span class="check-note">Si solicita cambio de nombres, fecha expedición o fecha nacimiento → escalar a F&P</span></div>
         </div>
@@ -459,19 +459,19 @@
         <span class="section-chevron">▼</span>
       </div>
       <div class="section-body">
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="2" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Confirmar que el correo del usuario NO está asociado a una cuenta en Rushbet</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="2" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Verificar que el usuario adjuntó foto del documento de identidad (ambos lados)</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="2" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Verificar que adjuntó selfie sosteniendo el documento a la altura de la mejilla</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="2" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Validar calidad de las imágenes (legibles, 4 esquinas visibles, sin reflejos ni cortes)</span></div>
         </div>
@@ -489,25 +489,25 @@
       </div>
       <div class="section-body">
         <div class="sub-section-label">Remarks en BO</div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="3" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 601 + número de ticket</span><span class="check-note">Hacerlo ANTES de cualquier cambio en la cuenta</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="3" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Realizar la actualización del dato solicitado en BO</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="3" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Registrar nota en ventana emergente (pop-up): "Actualización de datos | Ticket#___"</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="3" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 601 + número de ticket</span></div>
         </div>
         <hr class="divider">
         <div class="sub-section-label">Reminder en Slack</div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="3" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Generar reminder en #csdata_reminders según jurisdicción</span></div>
         </div>
@@ -529,19 +529,19 @@
       </div>
       <div class="section-body">
         <div class="info-block warn">Escalar cuando: saldo ≥ umbral por país, retiros Waiting/Pending, cambio de nombre/fechas, cuenta suspendida/cancelada por F&P, flag activo (Critical Verification, duplicados).</div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="4" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Confirmar que el usuario ya envió todos los soportes válidos</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="4" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Usar Workflow "Lat FP Datos Personales" en canal #lat_ops_compliance_legal</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="4" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Esperar notificación de F&P dentro del hilo del Workflow</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'act')">
+        <div class="check-item" data-tab="act" data-sec="4" onclick="toggle(this,'act')">
           <div class="check-box"></div>
           <div><span class="check-label">Responder ticket al usuario y agregar el caso al control correspondiente</span></div>
         </div>
@@ -579,11 +579,11 @@
         <span class="section-chevron">▼</span>
       </div>
       <div class="section-body">
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="1" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Responder con macro "SUPRESIÓN DE DATOS CO/MX/PE"</span><span class="check-note">Solicitar confirmación y motivo al usuario</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="1" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Generar primer reminder en #csdata_reminders según jurisdicción</span></div>
         </div>
@@ -606,27 +606,27 @@
       <div class="section-body">
         <div class="info-block success">El usuario respondió confirmando que desea proceder con la supresión. A partir de aquí gestiona un integrante de CS Seniors.</div>
         <div class="sub-section-label">Remarks y cancelación en BO</div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="2" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 2001 + número de ticket</span><span class="check-note">Hacerlo ANTES de modificar cualquier estado en la cuenta</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="2" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Activar flag "Locked" en la cuenta</span><span class="check-note">⚠️ NO usar "Locked Withdrawal Allowed"</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="2" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Desactivar todos los marks de marketing activos en la cuenta</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="2" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Registrar nota al activar el flag: "Supresión de datos | Ticket#___"</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="2" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 2001 + número de ticket</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="2" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Agregar el caso al control correspondiente</span></div>
         </div>
@@ -648,11 +648,11 @@
           Plazo del segundo reminder por país:<br>
           🇨🇴 Colombia: 15 días calendario &nbsp;|&nbsp; 🇲🇽 México: 10 días calendario &nbsp;|&nbsp; 🇵🇪 Perú: 7 días calendario
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="3" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Enviar macro "SEGUNDO AVISO SUPRESION CO/MX/PE"</span></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="3" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Generar segundo reminder en #csdata_reminders inmediatamente después del envío</span></div>
         </div>
@@ -661,7 +661,7 @@
           <span class="country-content sup-mx" style="display:none">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :flag-mx: Pending | segundo aviso at 07:00AM on [FECHA +10 días]</span>
           <span class="country-content sup-pe" style="display:none">/remind @channel Tools Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :peruu: Pending | segundo aviso at 07:00AM on [FECHA +7 días]</span>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
+        <div class="check-item" data-tab="sup" data-sec="3" onclick="toggle(this,'sup')">
           <div class="check-box"></div>
           <div><span class="check-label">Validar fecha del reminder según jurisdicción del usuario</span></div>
         </div>
@@ -679,7 +679,7 @@ function getState() {
   try { return JSON.parse(localStorage.getItem(STATE_KEY)) || {}; } catch { return {}; }
 }
 function saveState(s) {
-  localStorage.setItem(STATE_KEY, JSON.stringify(s));
+  try { localStorage.setItem(STATE_KEY, JSON.stringify(s)); } catch(e) {}
 }
 
 function toggle(el, tab) {
@@ -699,6 +699,8 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   btn.classList.add('active');
+  updateProgress('act');
+  updateProgress('sup');
 }
 
 let currentCountry = { act: 'co', sup: 'co' };
@@ -726,24 +728,23 @@ function updateReminders() {
 }
 
 function updateProgress(tab) {
-  const panel = document.getElementById('tab-' + tab);
-  // Force visibility to ensure querySelectorAll counts correctly
-  panel.classList.add('counting');
-  const all = panel.querySelectorAll('.check-item');
-  const done = panel.querySelectorAll('.check-item.done');
-  const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
-  panel.classList.remove('counting');
+  // Count ALL check items using data attributes instead of DOM visibility
+  const allItems = document.querySelectorAll('[data-tab="' + tab + '"]');
+  const doneItems = document.querySelectorAll('[data-tab="' + tab + '"].done');
+  const total = allItems.length;
+  const done = doneItems.length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
 
   document.getElementById('prog-' + tab).style.width = pct + '%';
   document.getElementById('pct-' + tab).textContent = pct + '%';
 
   // Section progress
-  panel.querySelectorAll('.section').forEach(sec => {
-    const id = sec.id.replace('s-', '');
-    const secAll = sec.querySelectorAll('.check-item');
-    const secDone = sec.querySelectorAll('.check-item.done');
-    const sp = document.getElementById('sp-' + id);
-    if (sp) sp.textContent = secDone.length + '/' + secAll.length;
+  ['1','2','3','4'].forEach(n => {
+    const sp = document.getElementById('sp-' + tab + '-' + n);
+    if (!sp) return;
+    const secAll = document.querySelectorAll('[data-tab="' + tab + '"][data-sec="' + n + '"]');
+    const secDone = document.querySelectorAll('[data-tab="' + tab + '"][data-sec="' + n + '"].done');
+    sp.textContent = secDone.length + '/' + secAll.length;
   });
 
   const badge = document.getElementById('badge-' + tab);
@@ -801,6 +802,8 @@ function resetAll() {
 }
 
 loadState();
+updateProgress('act');
+updateProgress('sup');
 </script>
 </body>
 </html>
