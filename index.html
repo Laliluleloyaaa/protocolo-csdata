@@ -123,6 +123,7 @@
   /* PANEL */
   .panel { display: none; }
   .panel.active { display: block; }
+  .panel.counting { display: block !important; visibility: hidden !important; position: absolute !important; pointer-events: none !important; }
 
   /* COUNTRY SELECTOR */
   .country-bar {
@@ -726,9 +727,13 @@ function updateReminders() {
 
 function updateProgress(tab) {
   const panel = document.getElementById('tab-' + tab);
+  // Force visibility to ensure querySelectorAll counts correctly
+  panel.classList.add('counting');
   const all = panel.querySelectorAll('.check-item');
   const done = panel.querySelectorAll('.check-item.done');
   const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+  panel.classList.remove('counting');
+
   document.getElementById('prog-' + tab).style.width = pct + '%';
   document.getElementById('pct-' + tab).textContent = pct + '%';
 
