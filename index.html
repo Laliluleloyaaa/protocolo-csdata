@@ -683,8 +683,9 @@ function saveState(s) {
 
 function toggle(el, tab) {
   el.classList.toggle('done');
+  updateProgress('act');
+  updateProgress('sup');
   persistChecks();
-  updateProgress(tab);
 }
 
 function toggleSection(id) {
