@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo Processing Data — @csdata</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181b24;
+    --surface2: #1f2330;
+    --border: #2a2f3d;
+    --accent: #4f8ef7;
+    --accent2: #34d399;
+    --warn: #f59e0b;
+    --danger: #f87171;
+    --text: #e2e8f0;
+    --text2: #8892a4;
+    --text3: #4a5568;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .logo span { color: var(--text2); }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .analyst-input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 6px 12px;
+    outline: none;
+    width: 180px;
+    transition: border-color 0.2s;
+  }
+  .analyst-input:focus { border-color: var(--accent); }
+  .analyst-input::placeholder { color: var(--text3); }
+  .reset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text2);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 12px;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--danger); color: var(--danger); }
+
+  /* LAYOUT */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+  }
+  .tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--text2);
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 12px;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .tab.active {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .tab:hover:not(.active) { color: var(--text); }
+
+  /* PANEL */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* COUNTRY SELECTOR */
+  .country-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .country-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text2);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 7px 18px;
+    transition: all 0.2s;
+  }
+  .country-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(79,142,247,0.08);
+  }
+  .country-btn:hover:not(.active) { border-color: var(--text3); color: var(--text); }
+
+  /* SECTION */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .section-header {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    padding: 14px 18px;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .section-header:hover { background: var(--surface2); }
+  .section-icon {
+    font-size: 15px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .section-progress {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text2);
+  }
+  .section-chevron {
+    color: var(--text3);
+    font-size: 11px;
+    transition: transform 0.2s;
+  }
+  .section.open .section-chevron { transform: rotate(180deg); }
+  .section-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 6px 0;
+  }
+  .section.open .section-body { display: block; }
+
+  /* CHECKLIST ITEMS */
+  .check-item {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    gap: 12px;
+    padding: 10px 18px;
+    transition: background 0.1s;
+    border-radius: 0;
+  }
+  .check-item:hover { background: rgba(255,255,255,0.02); }
+  .check-box {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--text3);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    font-size: 10px;
+  }
+  .check-item.done .check-box {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #0f1117;
+  }
+  .check-item.done .check-label { color: var(--text3); text-decoration: line-through; }
+  .check-label {
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+    transition: color 0.15s;
+  }
+  .check-note {
+    color: var(--text2);
+    font-size: 11px;
+    font-family: var(--mono);
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* INFO BLOCKS */
+  .info-block {
+    margin: 4px 18px 8px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .info-block.warn {
+    background: rgba(245,158,11,0.08);
+    border-left: 3px solid var(--warn);
+    color: #fcd34d;
+  }
+  .info-block.info {
+    background: rgba(79,142,247,0.07);
+    border-left: 3px solid var(--accent);
+    color: #93c5fd;
+  }
+  .info-block.success {
+    background: rgba(52,211,153,0.07);
+    border-left: 3px solid var(--accent2);
+    color: #6ee7b7;
+  }
+  .info-block code {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: rgba(255,255,255,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+    display: block;
+    margin-top: 4px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* REMINDER BOX */
+  .reminder-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 4px 18px 8px;
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* PROGRESS BAR GLOBAL */
+  .progress-global {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-bar-wrap {
+    flex: 1;
+    background: var(--surface2);
+    border-radius: 100px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text2);
+    white-space: nowrap;
+  }
+  .progress-pct {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent2);
+    min-width: 36px;
+    text-align: right;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 4px 18px;
+  }
+
+  /* SUBLABEL */
+  .sub-section-label {
+    padding: 10px 18px 4px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* TICKET INPUT */
+  .ticket-input-wrap {
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ticket-input-wrap label {
+    font-size: 12px;
+    color: var(--text2);
+    white-space: nowrap;
+  }
+  .ticket-input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 5px 10px;
+    outline: none;
+    width: 140px;
+    transition: border-color 0.2s;
+  }
+  .ticket-input:focus { border-color: var(--accent); }
+
+  .complete-badge {
+    display: none;
+    background: rgba(52,211,153,0.1);
+    border: 1px solid var(--accent2);
+    border-radius: 6px;
+    color: var(--accent2);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 12px 18px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .complete-badge.show { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">@csdata <span>/ Processing Data — Protocolo</span></div>
+  <div class="header-right">
+    <input class="analyst-input" id="analystName" placeholder="Tu nombre…" oninput="saveAnalyst(this.value)">
+    <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('actualizacion', this)">🔄 Actualización de datos</button>
+    <button class="tab" onclick="switchTab('supresion', this)">🗑️ Supresión de datos</button>
+  </div>
+
+  <!-- ===== TAB: ACTUALIZACIÓN ===== -->
+  <div class="panel active" id="tab-actualizacion">
+    <div class="country-bar">
+      <button class="country-btn active" onclick="switchCountry('act','co',this)">🇨🇴 Colombia</button>
+      <button class="country-btn" onclick="switchCountry('act','mx',this)">🇲🇽 México</button>
+      <button class="country-btn" onclick="switchCountry('act','pe',this)">🇵🇪 Perú</button>
+    </div>
+
+    <div class="progress-global">
+      <span class="progress-label">Progreso del caso</span>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="prog-act"></div></div>
+      <span class="progress-pct" id="pct-act">0%</span>
+    </div>
+    <div class="complete-badge" id="badge-act">✓ Protocolo completado — Ticket listo para cerrar</div>
+
+    <div class="ticket-input-wrap">
+      <label>Ticket #</label>
+      <input class="ticket-input" id="ticket-act" placeholder="XXXXXX" oninput="updateReminders()">
+    </div>
+
+    <!-- PASO 1: Identificar tipo de gestión -->
+    <div class="section open" id="s-act-1">
+      <div class="section-header" onclick="toggleSection('act-1')">
+        <span class="section-icon">⚖️</span>
+        <span class="section-title">1. Identificar tipo de gestión (CS vs F&P)</span>
+        <span class="section-progress" id="sp-act-1">0/3</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Verificar saldo de la cuenta</span><span class="check-note">CO &lt;$50.000 COP | MX &lt;$200 MXN | PE &lt;S/50 → CS puede gestionar</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Confirmar que no hay retiros en estado Waiting/Pending</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Confirmar qué datos solicita actualizar</span><span class="check-note">Si solicita cambio de nombres, fecha expedición o fecha nacimiento → escalar a F&P</span></div>
+        </div>
+        <div class="info-block warn">⚠️ Si la cuenta NO cumple las condiciones de CS o solicita cambio de nombre/fechas, ir directo a la sección de Escalamiento F&P.</div>
+      </div>
+    </div>
+
+    <!-- PASO 2: Validaciones iniciales -->
+    <div class="section" id="s-act-2">
+      <div class="section-header" onclick="toggleSection('act-2')">
+        <span class="section-icon">📩</span>
+        <span class="section-title">2. Validaciones iniciales</span>
+        <span class="section-progress" id="sp-act-2">0/4</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Confirmar que el correo del usuario NO está asociado a una cuenta en Rushbet</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Verificar que el usuario adjuntó foto del documento de identidad (ambos lados)</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Verificar que adjuntó selfie sosteniendo el documento a la altura de la mejilla</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Validar calidad de las imágenes (legibles, 4 esquinas visibles, sin reflejos ni cortes)</span></div>
+        </div>
+        <div class="info-block info">Si alguna imagen no cumple los parámetros: solicitar nuevamente, indicar el fallo específico y adjuntar imagen de referencia. Usar macro: <strong>ACTUALIZACION DOCS CO/MX/PE</strong></div>
+      </div>
+    </div>
+
+    <!-- PASO 3: Gestión directa CS -->
+    <div class="section" id="s-act-3">
+      <div class="section-header" onclick="toggleSection('act-3')">
+        <span class="section-icon">✔️</span>
+        <span class="section-title">3. Gestión directa por @csdata</span>
+        <span class="section-progress" id="sp-act-3">0/5</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="sub-section-label">Remarks en BO</div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 601 + número de ticket</span><span class="check-note">Hacerlo ANTES de cualquier cambio en la cuenta</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Realizar la actualización del dato solicitado en BO</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Registrar nota en ventana emergente (pop-up): "Actualización de datos | Ticket#___"</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 601 + número de ticket</span></div>
+        </div>
+        <hr class="divider">
+        <div class="sub-section-label">Reminder en Slack</div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Generar reminder en #csdata_reminders según jurisdicción</span></div>
+        </div>
+        <div class="reminder-box" id="reminder-act-co">
+          <span class="country-content act-co">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :col: Pending | Enviar segundo aviso at 07:00AM on [FECHA +30 días]</span>
+          <span class="country-content act-mx" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :flag-mx: Pending | CERRAR TICKET at 07:00AM on [FECHA +10 días]</span>
+          <span class="country-content act-pe" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :peruu: Pending | CERRAR TICKET at 07:00AM on [FECHA +5 días hábiles]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 4: Escalamiento F&P -->
+    <div class="section" id="s-act-4">
+      <div class="section-header" onclick="toggleSection('act-4')">
+        <span class="section-icon">🧩</span>
+        <span class="section-title">4. Escalamiento a F&P (si aplica)</span>
+        <span class="section-progress" id="sp-act-4">0/4</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="info-block warn">Escalar cuando: saldo ≥ umbral por país, retiros Waiting/Pending, cambio de nombre/fechas, cuenta suspendida/cancelada por F&P, flag activo (Critical Verification, duplicados).</div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Confirmar que el usuario ya envió todos los soportes válidos</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Usar Workflow "Lat FP Datos Personales" en canal #lat_ops_compliance_legal</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Esperar notificación de F&P dentro del hilo del Workflow</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'act')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Responder ticket al usuario y agregar el caso al control correspondiente</span></div>
+        </div>
+        <div class="info-block info">Si la solicitud llegó a una bandeja incorrecta: crear nuevo ticket en la bandeja correcta → responder desde ese ticket → fusionar con el ticket original.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: SUPRESIÓN ===== -->
+  <div class="panel" id="tab-supresion">
+    <div class="country-bar">
+      <button class="country-btn active" onclick="switchCountry('sup','co',this)">🇨🇴 Colombia</button>
+      <button class="country-btn" onclick="switchCountry('sup','mx',this)">🇲🇽 México</button>
+      <button class="country-btn" onclick="switchCountry('sup','pe',this)">🇵🇪 Perú</button>
+    </div>
+
+    <div class="progress-global">
+      <span class="progress-label">Progreso del caso</span>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="prog-sup"></div></div>
+      <span class="progress-pct" id="pct-sup">0%</span>
+    </div>
+    <div class="complete-badge" id="badge-sup">✓ Protocolo completado — Ticket listo para cerrar</div>
+
+    <div class="ticket-input-wrap">
+      <label>Ticket #</label>
+      <input class="ticket-input" id="ticket-sup" placeholder="XXXXXX" oninput="updateReminders()">
+    </div>
+
+    <!-- PASO 1: Primer contacto -->
+    <div class="section open" id="s-sup-1">
+      <div class="section-header" onclick="toggleSection('sup-1')">
+        <span class="section-icon">📧</span>
+        <span class="section-title">1. Primer contacto al usuario (@csdata)</span>
+        <span class="section-progress" id="sp-sup-1">0/2</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Responder con macro "SUPRESIÓN DE DATOS CO/MX/PE"</span><span class="check-note">Solicitar confirmación y motivo al usuario</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Generar primer reminder en #csdata_reminders según jurisdicción</span></div>
+        </div>
+        <div class="reminder-box">
+          <span class="country-content sup-co">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :col: Pending | Enviar segundo aviso at 07:00AM on [FECHA +15 días]</span>
+          <span class="country-content sup-mx" style="display:none">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :flag-mx: Pending | segundo aviso at 07:00AM on [FECHA +5 días]</span>
+          <span class="country-content sup-pe" style="display:none">/remind @channel Tools Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :peruu: Pending | segundo aviso at 07:00AM on [FECHA +3 días hábiles]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2: Respuesta del usuario -->
+    <div class="section" id="s-sup-2">
+      <div class="section-header" onclick="toggleSection('sup-2')">
+        <span class="section-icon">👤</span>
+        <span class="section-title">2. Si el usuario confirma — Gestión CS Seniors</span>
+        <span class="section-progress" id="sp-sup-2">0/6</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="info-block success">El usuario respondió confirmando que desea proceder con la supresión. A partir de aquí gestiona un integrante de CS Seniors.</div>
+        <div class="sub-section-label">Remarks y cancelación en BO</div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 2001 + número de ticket</span><span class="check-note">Hacerlo ANTES de modificar cualquier estado en la cuenta</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Activar flag "Locked" en la cuenta</span><span class="check-note">⚠️ NO usar "Locked Withdrawal Allowed"</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Desactivar todos los marks de marketing activos en la cuenta</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Registrar nota al activar el flag: "Supresión de datos | Ticket#___"</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 2001 + número de ticket</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Agregar el caso al control correspondiente</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 3: Sin respuesta — segundo aviso -->
+    <div class="section" id="s-sup-3">
+      <div class="section-header" onclick="toggleSection('sup-3')">
+        <span class="section-icon">⏰</span>
+        <span class="section-title">3. Si no hay respuesta — Segundo aviso (CS Seniors)</span>
+        <span class="section-progress" id="sp-sup-3">0/3</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="info-block warn">
+          El primer reminder de Slack se activó y el usuario aún no respondió. Se debe enviar segundo aviso.
+          <br><br>
+          Plazo del segundo reminder por país:<br>
+          🇨🇴 Colombia: 15 días calendario &nbsp;|&nbsp; 🇲🇽 México: 10 días calendario &nbsp;|&nbsp; 🇵🇪 Perú: 7 días calendario
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Enviar macro "SEGUNDO AVISO SUPRESION CO/MX/PE"</span></div>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Generar segundo reminder en #csdata_reminders inmediatamente después del envío</span></div>
+        </div>
+        <div class="reminder-box">
+          <span class="country-content sup-co">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :col: Pending | Enviar segundo aviso at 07:00AM on [FECHA +15 días]</span>
+          <span class="country-content sup-mx" style="display:none">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :flag-mx: Pending | segundo aviso at 07:00AM on [FECHA +10 días]</span>
+          <span class="country-content sup-pe" style="display:none">/remind @channel Tools Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :peruu: Pending | segundo aviso at 07:00AM on [FECHA +7 días]</span>
+        </div>
+        <div class="check-item" onclick="toggle(this,'sup')">
+          <div class="check-box"></div>
+          <div><span class="check-label">Validar fecha del reminder según jurisdicción del usuario</span></div>
+        </div>
+        <div class="info-block info">Al recibir la notificación del segundo reminder: validar si el usuario respondió. Si continúa sin responder → cerrar ticket con nota interna: <em>"Ticket cerrado por la no respuesta del cliente"</em></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const STATE_KEY = 'csdata_protocol_v2';
+
+function getState() {
+  try { return JSON.parse(localStorage.getItem(STATE_KEY)) || {}; } catch { return {}; }
+}
+function saveState(s) {
+  localStorage.setItem(STATE_KEY, JSON.stringify(s));
+}
+
+function toggle(el, tab) {
+  el.classList.toggle('done');
+  persistChecks();
+  updateProgress(tab);
+}
+
+function toggleSection(id) {
+  const el = document.getElementById('s-' + id);
+  el.classList.toggle('open');
+}
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+let currentCountry = { act: 'co', sup: 'co' };
+
+function switchCountry(tab, country, btn) {
+  currentCountry[tab] = country;
+  btn.closest('.country-bar').querySelectorAll('.country-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // Show/hide reminder content
+  document.querySelectorAll('.country-content').forEach(el => {
+    if (el.classList.contains(tab + '-' + country)) {
+      el.style.display = '';
+    } else if ([...el.classList].some(c => c.startsWith(tab + '-'))) {
+      el.style.display = 'none';
+    }
+  });
+}
+
+function updateReminders() {
+  const actTicket = document.getElementById('ticket-act').value.trim() || 'XXXX';
+  const supTicket = document.getElementById('ticket-sup').value.trim() || 'XXXX';
+  document.querySelectorAll('.tkt-act').forEach(el => el.textContent = actTicket);
+  document.querySelectorAll('.tkt-sup').forEach(el => el.textContent = supTicket);
+  persistChecks();
+}
+
+function updateProgress(tab) {
+  const panel = document.getElementById('tab-' + tab);
+  const all = panel.querySelectorAll('.check-item');
+  const done = panel.querySelectorAll('.check-item.done');
+  const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+  document.getElementById('prog-' + tab).style.width = pct + '%';
+  document.getElementById('pct-' + tab).textContent = pct + '%';
+
+  // Section progress
+  panel.querySelectorAll('.section').forEach(sec => {
+    const id = sec.id.replace('s-', '');
+    const secAll = sec.querySelectorAll('.check-item');
+    const secDone = sec.querySelectorAll('.check-item.done');
+    const sp = document.getElementById('sp-' + id);
+    if (sp) sp.textContent = secDone.length + '/' + secAll.length;
+  });
+
+  const badge = document.getElementById('badge-' + tab);
+  if (pct === 100) badge.classList.add('show');
+  else badge.classList.remove('show');
+}
+
+function persistChecks() {
+  const state = getState();
+  ['act', 'sup'].forEach(tab => {
+    const panel = document.getElementById('tab-' + tab);
+    const items = panel.querySelectorAll('.check-item');
+    state['checks_' + tab] = [...items].map(i => i.classList.contains('done'));
+  });
+  state.ticket_act = document.getElementById('ticket-act').value;
+  state.ticket_sup = document.getElementById('ticket-sup').value;
+  state.analyst = document.getElementById('analystName').value;
+  saveState(state);
+}
+
+function loadState() {
+  const state = getState();
+  if (state.analyst) document.getElementById('analystName').value = state.analyst;
+  if (state.ticket_act) document.getElementById('ticket-act').value = state.ticket_act;
+  if (state.ticket_sup) document.getElementById('ticket-sup').value = state.ticket_sup;
+  ['act', 'sup'].forEach(tab => {
+    if (state['checks_' + tab]) {
+      const panel = document.getElementById('tab-' + tab);
+      const items = panel.querySelectorAll('.check-item');
+      state['checks_' + tab].forEach((done, i) => {
+        if (done && items[i]) items[i].classList.add('done');
+      });
+      updateProgress(tab);
+    }
+  });
+  updateReminders();
+}
+
+function saveAnalyst(v) {
+  const state = getState();
+  state.analyst = v;
+  saveState(state);
+}
+
+function resetAll() {
+  if (!confirm('¿Reiniciar todo el progreso del checklist?')) return;
+  localStorage.removeItem(STATE_KEY);
+  document.querySelectorAll('.check-item').forEach(i => i.classList.remove('done'));
+  document.getElementById('ticket-act').value = '';
+  document.getElementById('ticket-sup').value = '';
+  document.getElementById('analystName').value = '';
+  updateReminders();
+  updateProgress('act');
+  updateProgress('sup');
+}
+
+loadState();
+</script>
+</body>
+</html>
