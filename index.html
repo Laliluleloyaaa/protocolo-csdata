@@ -222,6 +222,17 @@
           <div><span class="check-label">Validar calidad de imágenes (legibles, 4 esquinas visibles, sin reflejos ni cortes)</span></div>
         </div>
         <div class="info-block info">Si alguna imagen no cumple: solicitar nuevamente, indicar el fallo y adjuntar imagen de referencia. Macro: <strong>ACTUALIZACION DOCS CO/MX/PE</strong></div>
+        <div class="info-block warn">⏰ Si se solicita nueva documentación, generar reminder en <strong>#csdata_reminders</strong> inmediatamente después de enviar la macro.</div>
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div><span class="check-label">Generar reminder de seguimiento por documentación pendiente</span><span class="check-note">Solo aplica si se solicitó nueva documentación al usuario</span></div>
+        </div>
+        <div class="reminder-box">
+          <button class="copy-btn" onclick="copyReminder(this)">copiar</button>
+          <span class="country-content act-co">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :col: Pending | Enviar segundo aviso at 07:00AM on [FECHA +30 días]</span>
+          <span class="country-content act-mx" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :flag-mx: Pending | CERRAR TICKET at 07:00AM on [FECHA +10 días]</span>
+          <span class="country-content act-pe" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :peruu: Pending | CERRAR TICKET at 07:00AM on [FECHA +5 días hábiles]</span>
+        </div>
       </div>
     </div>
 
