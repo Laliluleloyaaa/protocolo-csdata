@@ -142,11 +142,51 @@
       <input class="ticket-input" id="ticket-act" placeholder="XXXXXX" oninput="updateReminders()">
     </div>
 
+    <!-- PASO 1: Validaciones iniciales -->
+    <div class="section open" id="s-act-1">
+      <div class="section-header" onclick="toggleSection('act-1')">
+        <span class="section-icon">📩</span>
+        <span class="section-title">Validaciones iniciales</span>
+        <span class="section-progress" id="sp-act-1">0/4</span>
+        <span class="section-chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div><span class="check-label">Confirmar que el correo del usuario NO está asociado a una cuenta en Rushbet</span></div>
+        </div>
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div><span class="check-label">Verificar que el usuario adjuntó foto del documento de identidad (ambos lados)</span></div>
+        </div>
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div><span class="check-label">Verificar selfie sosteniendo el documento a la altura de la mejilla</span></div>
+        </div>
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div><span class="check-label">Validar calidad de imágenes (legibles, 4 esquinas visibles, sin reflejos ni cortes)</span></div>
+        </div>
+        <div class="info-block info">Si alguna imagen no cumple: solicitar nuevamente, indicar el fallo y adjuntar imagen de referencia. Macro: <strong>ACTUALIZACION DOCS CO/MX/PE</strong></div>
+        <div class="info-block warn">⏰ Si se solicita nueva documentación, generar reminder en <strong>#csdata_reminders</strong> inmediatamente después de enviar la macro.</div>
+        <div class="check-item" data-tab="act" data-sec="1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div><span class="check-label">Generar reminder de seguimiento por documentación pendiente</span><span class="check-note">Solo aplica si se solicitó nueva documentación al usuario</span></div>
+        </div>
+        <div class="reminder-box">
+          <button class="copy-btn" onclick="copyReminder(this)">copiar</button>
+          <span class="country-content act-co">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :col: Pending | Enviar segundo aviso at 07:00AM on [FECHA +30 días]</span>
+          <span class="country-content act-mx" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :flag-mx: Pending | CERRAR TICKET at 07:00AM on [FECHA +10 días]</span>
+          <span class="country-content act-pe" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :peruu: Pending | CERRAR TICKET at 07:00AM on [FECHA +5 días hábiles]</span>
+        </div>
+      </div>
+    </div>
+
     <!-- CRITERIOS CS vs F&P -->
     <div class="section open" id="s-act-crit">
       <div class="section-header" onclick="toggleSection('act-crit')">
         <span class="section-icon">⚖️</span>
-        <span class="section-title">2. Verificar condiciones de la cuenta</span>
+        <span class="section-title">Verificar condiciones de la cuenta</span>
         <span class="section-progress" id="sp-act-crit">0/5</span>
         <span class="section-chevron">▼</span>
       </div>
@@ -195,12 +235,9 @@
     </div>
 
     <div id="route-badge-act"></div>
-
-    <!-- PASO 1: Validaciones iniciales (siempre visible) -->
-    <div class="section open" id="s-act-1">
       <div class="section-header" onclick="toggleSection('act-1')">
         <span class="section-icon">📩</span>
-        <span class="section-title">1. Validaciones iniciales</span>
+        <span class="section-title">Validaciones iniciales</span>
         <span class="section-progress" id="sp-act-1">0/4</span>
         <span class="section-chevron">▼</span>
       </div>
@@ -240,7 +277,7 @@
     <div class="section route-cs hidden-route route-label-cs" id="s-act-2">
       <div class="section-header" onclick="toggleSection('act-2')">
         <span class="section-icon">✅</span>
-        <span class="section-title">3. Gestión directa @csdata</span>
+        <span class="section-title">Gestión directa @csdata</span>
         <span class="section-progress" id="sp-act-2">0/5</span>
         <span class="section-chevron">▼</span>
       </div>
@@ -271,7 +308,7 @@
     <div class="section route-fp hidden-route route-label-fp" id="s-act-3">
       <div class="section-header" onclick="toggleSection('act-3')">
         <span class="section-icon">🔀</span>
-        <span class="section-title">2. Escalamiento a F&P</span>
+        <span class="section-title">Escalamiento a F&P</span>
         <span class="section-progress" id="sp-act-3">0/4</span>
         <span class="section-chevron">▼</span>
       </div>
@@ -329,7 +366,7 @@
     <div class="section open" id="s-sup-1">
       <div class="section-header" onclick="toggleSection('sup-1')">
         <span class="section-icon">📧</span>
-        <span class="section-title">1. Primer contacto al usuario (@csdata)</span>
+        <span class="section-title">Primer contacto al usuario (@csdata)</span>
         <span class="section-progress" id="sp-sup-1">0/2</span>
         <span class="section-chevron">▼</span>
       </div>
@@ -375,7 +412,7 @@
     <div class="section route-cs hidden-route route-label-cs" id="s-sup-2">
       <div class="section-header" onclick="toggleSection('sup-2')">
         <span class="section-icon">👤</span>
-        <span class="section-title">2. Cancelación de cuenta — CS Seniors</span>
+        <span class="section-title">Cancelación de cuenta — CS Seniors</span>
         <span class="section-progress" id="sp-sup-2">0/6</span>
         <span class="section-chevron">▼</span>
       </div>
@@ -413,7 +450,7 @@
     <div class="section route-fp hidden-route route-label-fp" id="s-sup-3">
       <div class="section-header" onclick="toggleSection('sup-3')">
         <span class="section-icon">⏰</span>
-        <span class="section-title">2. Segundo aviso — Sin respuesta</span>
+        <span class="section-title">Segundo aviso — Sin respuesta</span>
         <span class="section-progress" id="sp-sup-3">0/3</span>
         <span class="section-chevron">▼</span>
       </div>
