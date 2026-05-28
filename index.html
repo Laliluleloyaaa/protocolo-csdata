@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="version" content="v3-fecha-coma">
 <title>Protocolo Processing Data — @csdata</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -425,7 +426,7 @@ function ordinal(n) {
 
 function formatDate(d) {
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  return `${months[d.getMonth()]} ${ordinal(d.getDate())} ${d.getFullYear()}`;
+  return `${months[d.getMonth()]} ${ordinal(d.getDate())}, ${d.getFullYear()}`;
 }
 
 function formatDateES(d) {
