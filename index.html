@@ -24,20 +24,14 @@
   .reset-btn{background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer;font-family:var(--mono);font-size:11px;padding:6px 12px;transition:all .2s;}
   .reset-btn:hover{border-color:var(--danger);color:var(--danger);}
   .container{max-width:900px;margin:0 auto;padding:28px 20px 80px;}
-
-  /* TABS */
   .tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:4px;}
   .tab{flex:1;background:transparent;border:none;border-radius:6px;color:var(--text2);cursor:pointer;font-family:var(--sans);font-size:12px;font-weight:500;padding:8px 12px;transition:all .2s;}
   .tab.active{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
   .panel{display:none;}
   .panel.active{display:block;}
-
-  /* COUNTRY */
   .country-bar{display:flex;gap:8px;margin-bottom:20px;}
   .country-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer;font-family:var(--mono);font-size:12px;padding:7px 18px;transition:all .2s;}
   .country-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(79,142,247,.08);}
-
-  /* PROGRESS */
   .progress-global{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;}
   .progress-bar-wrap{flex:1;background:var(--surface2);border-radius:100px;height:6px;overflow:hidden;}
   .progress-bar-fill{background:linear-gradient(90deg,var(--accent),var(--accent2));height:100%;border-radius:100px;transition:width .4s ease;width:0%;}
@@ -45,14 +39,12 @@
   .progress-pct{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--accent2);min-width:36px;text-align:right;}
   .complete-badge{display:none;background:rgba(52,211,153,.1);border:1px solid var(--accent2);border-radius:6px;color:var(--accent2);font-family:var(--mono);font-size:12px;padding:12px 18px;margin-bottom:16px;text-align:center;}
   .complete-badge.show{display:block;}
-
-  /* TICKET */
-  .ticket-input-wrap{padding:10px 18px;display:flex;align-items:center;gap:8px;}
+  .ticket-input-wrap{padding:10px 18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
   .ticket-input-wrap label{font-size:12px;color:var(--text2);white-space:nowrap;}
   .ticket-input{background:var(--surface2);border:1px solid var(--border);border-radius:5px;color:var(--accent);font-family:var(--mono);font-size:12px;padding:5px 10px;outline:none;width:140px;}
   .ticket-input:focus{border-color:var(--accent);}
-
-  /* SECTIONS */
+  .date-input{background:var(--surface2);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:var(--mono);font-size:12px;padding:5px 10px;outline:none;}
+  .date-input:focus{border-color:var(--accent);}
   .section{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;}
   .section.hidden-route{display:none;}
   .section-header{align-items:center;cursor:pointer;display:flex;gap:10px;padding:13px 18px;user-select:none;transition:background .15s;}
@@ -66,8 +58,6 @@
   .section.open .section-body{display:block;}
   .route-label-cs{border-left:3px solid var(--accent2);}
   .route-label-fp{border-left:3px solid #a78bfa;}
-
-  /* CHECKLIST */
   .check-item{align-items:flex-start;cursor:pointer;display:flex;gap:12px;padding:10px 18px;transition:background .1s;}
   .check-item:hover{background:rgba(255,255,255,.02);}
   .check-box{width:16px;height:16px;border:1.5px solid var(--text3);border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:10px;}
@@ -75,20 +65,16 @@
   .check-item.done .check-label{color:var(--text3);text-decoration:line-through;}
   .check-label{color:var(--text);font-size:13px;line-height:1.5;}
   .check-note{color:var(--text2);font-size:11px;font-family:var(--mono);margin-top:3px;display:block;}
-
-  /* INFO BLOCKS */
   .info-block{margin:4px 18px 8px;padding:10px 14px;border-radius:6px;font-size:12px;line-height:1.6;}
   .info-block.warn{background:rgba(245,158,11,.08);border-left:3px solid var(--warn);color:#fcd34d;}
   .info-block.info{background:rgba(79,142,247,.07);border-left:3px solid var(--accent);color:#93c5fd;}
   .info-block.success{background:rgba(52,211,153,.07);border-left:3px solid var(--accent2);color:#6ee7b7;}
   .info-block.purple{background:rgba(167,139,250,.07);border-left:3px solid #a78bfa;color:#c4b5fd;}
-
-  /* REMINDER */
-  .reminder-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;margin:4px 18px 8px;padding:10px 14px;font-family:var(--mono);font-size:11px;color:var(--accent);white-space:pre-wrap;word-break:break-all;position:relative;}
+  .reminder-box{background:var(--surface2);border:1px solid var(--border);border-radius:6px;margin:4px 18px 8px;padding:10px 14px 10px 14px;font-family:var(--mono);font-size:11px;color:var(--accent);word-break:break-all;position:relative;}
+  .reminder-text{padding-right:70px;white-space:pre-wrap;}
   .copy-btn{position:absolute;top:8px;right:8px;background:var(--surface);border:1px solid var(--border);border-radius:4px;color:var(--text2);cursor:pointer;font-size:10px;font-family:var(--mono);padding:3px 8px;transition:all .2s;}
   .copy-btn:hover{border-color:var(--accent);color:var(--accent);}
-
-  /* CONDITIONAL */
+  .date-badge{display:inline-block;background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.3);border-radius:4px;color:var(--accent);font-family:var(--mono);font-size:10px;padding:1px 6px;margin-left:4px;}
   .conditional-block{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;padding:18px 20px;}
   .conditional-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;}
   .conditional-sub{font-size:11px;color:var(--text2);font-family:var(--mono);margin-bottom:12px;}
@@ -105,8 +91,6 @@
   .route-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11px;font-family:var(--mono);font-weight:500;margin-bottom:16px;}
   .route-badge.cs{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:var(--accent2);}
   .route-badge.fp{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:#a78bfa;}
-
-  /* MISC */
   .divider{border:none;border-top:1px solid var(--border);margin:4px 18px;}
   .sub-section-label{padding:10px 18px 4px;font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;}
   .conditions-list{padding:6px 18px 4px;font-size:11px;color:var(--text2);font-family:var(--mono);}
@@ -145,7 +129,9 @@
     <div class="complete-badge" id="badge-act">✓ Protocolo completado — Ticket listo para cerrar</div>
     <div class="ticket-input-wrap">
       <label>Ticket #</label>
-      <input class="ticket-input" id="ticket-act" placeholder="XXXXXX" oninput="updateReminders()">
+      <input class="ticket-input" id="ticket-act" placeholder="XXXXXX" oninput="updateAllReminders()">
+      <label style="margin-left:12px;">Fecha inicio</label>
+      <input class="date-input" type="date" id="date-act" oninput="updateAllReminders()">
     </div>
 
     <!-- SECCIÓN: Validaciones iniciales -->
@@ -157,33 +143,16 @@
         <span class="section-chevron">▼</span>
       </div>
       <div class="section-body">
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Confirmar que el correo del usuario NO está asociado a una cuenta en Rushbet</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Verificar que el usuario adjuntó foto del documento de identidad (ambos lados)</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Verificar selfie sosteniendo el documento a la altura de la mejilla</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Validar calidad de imágenes (legibles, 4 esquinas visibles, sin reflejos ni cortes)</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Confirmar que el correo del usuario NO está asociado a una cuenta en Rushbet</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Verificar que el usuario adjuntó foto del documento de identidad (ambos lados)</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Verificar selfie sosteniendo el documento a la altura de la mejilla</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Validar calidad de imágenes (legibles, 4 esquinas visibles, sin reflejos ni cortes)</span></div></div>
         <div class="info-block info">Si alguna imagen no cumple: solicitar nuevamente, indicar el fallo y adjuntar imagen de referencia. Macro: <strong>ACTUALIZACION DOCS CO/MX/PE</strong></div>
         <div class="info-block warn">⏰ Si se solicita nueva documentación, generar reminder en <strong>#csdata_reminders</strong> inmediatamente después de enviar la macro.</div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Generar reminder de seguimiento por documentación pendiente</span><span class="check-note">Solo aplica si se solicitó nueva documentación al usuario</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Generar reminder de seguimiento por documentación pendiente</span><span class="check-note">Solo aplica si se solicitó nueva documentación al usuario</span></div></div>
         <div class="reminder-box">
           <button class="copy-btn" onclick="copyReminder(this)">copiar</button>
-          <span class="cc act-co">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :col: Pending | Enviar segundo aviso at 07:00AM on [FECHA +30 días]</span>
-          <span class="cc act-mx" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :flag-mx: Pending | CERRAR TICKET at 07:00AM on [FECHA +10 días]</span>
-          <span class="cc act-pe" style="display:none">/remind @channel Ticket #<span class="tkt-act">XXXX</span> ACTUALIZACIÓN :peruu: Pending | CERRAR TICKET at 07:00AM on [FECHA +5 días hábiles]</span>
+          <div class="reminder-text" id="rem-act-docs"></div>
         </div>
       </div>
     </div>
@@ -198,26 +167,11 @@
       </div>
       <div class="section-body">
         <div class="sub-section-label">Deben cumplirse TODAS para gestión directa @csdata</div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Saldo inferior al umbral por país</span><span class="check-note">CO &lt; $50.000 COP · MX &lt; $200 MXN · PE &lt; S/50</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Sin retiros en estado Waiting / Pending</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">La solicitud es de: correo electrónico, dirección de residencia o número de teléfono</span><span class="check-note">Si solicita cambio de nombres, fecha de expedición o fecha de nacimiento → F&amp;P</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Cuenta sin suspensión ni cancelación previa por F&amp;P</span><span class="check-note">Locked · LWA · Critical Verification → F&amp;P</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Cuenta sin flags de duplicado activos</span><span class="check-note">Possible duplicate · DUPLICATE · Lock Duplicate Accounts → F&amp;P</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Saldo inferior al umbral por país</span><span class="check-note">CO &lt; $50.000 COP · MX &lt; $200 MXN · PE &lt; S/50</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Sin retiros en estado Waiting / Pending</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">La solicitud es de: correo electrónico, dirección de residencia o número de teléfono</span><span class="check-note">Si solicita cambio de nombres, fecha de expedición o fecha de nacimiento → F&amp;P</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Cuenta sin suspensión ni cancelación previa por F&amp;P</span><span class="check-note">Locked · LWA · Critical Verification → F&amp;P</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Cuenta sin flags de duplicado activos</span><span class="check-note">Possible duplicate · DUPLICATE · Lock Duplicate Accounts → F&amp;P</span></div></div>
         <div class="info-block warn">Si alguna condición NO se cumple → seleccionar "Escalar a F&amp;P" en el paso siguiente.</div>
       </div>
     </div>
@@ -228,20 +182,18 @@
       <div class="conditional-sub">Selecciona según lo verificado en el paso anterior.</div>
       <div class="conditional-options">
         <button class="cond-btn" id="btn-act-cs" onclick="selectRoute('act','cs')">
-          <span class="cond-icon">✅</span>
-          <span class="cond-label">Gestión directa @csdata</span>
+          <span class="cond-icon">✅</span><span class="cond-label">Gestión directa @csdata</span>
           <span class="cond-sublabel">Todas las condiciones se cumplen</span>
         </button>
         <button class="cond-btn" id="btn-act-fp" onclick="selectRoute('act','fp')">
-          <span class="cond-icon">🔀</span>
-          <span class="cond-label">Escalar a F&amp;P</span>
+          <span class="cond-icon">🔀</span><span class="cond-label">Escalar a F&amp;P</span>
           <span class="cond-sublabel">Al menos una condición no se cumple</span>
         </button>
       </div>
     </div>
     <div id="route-badge-act"></div>
 
-    <!-- RUTA CS: Gestión directa -->
+    <!-- RUTA CS -->
     <div class="section route-cs hidden-route route-label-cs" id="s-act-cs">
       <div class="section-header" onclick="toggleSection('act-cs')">
         <span class="section-icon">✅</span>
@@ -252,27 +204,15 @@
       <div class="section-body">
         <div class="info-block success">Condiciones cumplidas — saldo bajo umbral, sin retiros pendientes, solicitud de correo / dirección / teléfono.</div>
         <div class="sub-section-label">Remarks en BO</div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 601 + número de ticket</span><span class="check-note">ANTES de cualquier cambio en la cuenta</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Realizar la actualización del dato solicitado en BO</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Registrar nota en pop-up: "Actualización de datos | Ticket#___"</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 601 + número de ticket</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 601 + número de ticket</span><span class="check-note">ANTES de cualquier cambio en la cuenta</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Realizar la actualización del dato solicitado en BO</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Registrar nota en pop-up: "Actualización de datos | Ticket#___"</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 601 + número de ticket</span></div></div>
         <div class="info-block success">✅ Gestión completada — no se requiere generar reminder en Slack.</div>
       </div>
     </div>
 
-    <!-- RUTA F&P: Escalamiento -->
+    <!-- RUTA F&P -->
     <div class="section route-fp hidden-route route-label-fp" id="s-act-fp">
       <div class="section-header" onclick="toggleSection('act-fp')">
         <span class="section-icon">🔀</span>
@@ -289,23 +229,11 @@
           <li>🇵🇪 PE: saldo o retiros ≥ S/50</li>
         </ul>
         <hr class="divider">
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Confirmar que el usuario ya envió todos los soportes válidos</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Usar Workflow "Lat FP Datos Personales" en canal #lat_ops_compliance_legal</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Esperar notificación de F&amp;P dentro del hilo del Workflow</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'act')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Responder ticket al usuario y agregar el caso al control correspondiente</span></div>
-        </div>
-        <div class="info-block info">Si la solicitud llegó a una bandeja incorrecta: crear nuevo ticket en la bandeja correcta → responder → fusionar con el original.</div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Confirmar que el usuario ya envió todos los soportes válidos</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Usar Workflow "Lat FP Datos Personales" en canal #lat_ops_compliance_legal</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Esperar notificación de F&amp;P dentro del hilo del Workflow</span></div></div>
+        <div class="check-item" onclick="toggle(this,'act')"><div class="check-box"></div><div><span class="check-label">Responder ticket al usuario y agregar el caso al control correspondiente</span></div></div>
+        <div class="info-block info">Si la solicitud llegó a una bandeja incorrecta: crear nuevo ticket → responder → fusionar con el original.</div>
       </div>
     </div>
   </div>
@@ -325,7 +253,9 @@
     <div class="complete-badge" id="badge-sup">✓ Protocolo completado — Ticket listo para cerrar</div>
     <div class="ticket-input-wrap">
       <label>Ticket #</label>
-      <input class="ticket-input" id="ticket-sup" placeholder="XXXXXX" oninput="updateReminders()">
+      <input class="ticket-input" id="ticket-sup" placeholder="XXXXXX" oninput="updateAllReminders()">
+      <label style="margin-left:12px;">Fecha inicio</label>
+      <input class="date-input" type="date" id="date-sup" oninput="updateAllReminders()">
     </div>
 
     <!-- SECCIÓN: Primer contacto -->
@@ -337,19 +267,11 @@
         <span class="section-chevron">▼</span>
       </div>
       <div class="section-body">
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Responder con macro "SUPRESIÓN DE DATOS CO/MX/PE"</span><span class="check-note">Solicitar confirmación y motivo al usuario</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Generar primer reminder en #csdata_reminders según jurisdicción</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Responder con macro "SUPRESIÓN DE DATOS CO/MX/PE"</span><span class="check-note">Solicitar confirmación y motivo al usuario</span></div></div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Generar primer reminder en #csdata_reminders según jurisdicción</span></div></div>
         <div class="reminder-box">
           <button class="copy-btn" onclick="copyReminder(this)">copiar</button>
-          <span class="cc sup-co">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :col: Pending | Enviar segundo aviso at 07:00AM on [FECHA +15 días]</span>
-          <span class="cc sup-mx" style="display:none">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :flag-mx: Pending | segundo aviso at 07:00AM on [FECHA +5 días]</span>
-          <span class="cc sup-pe" style="display:none">/remind @channel Tools Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :peruu: Pending | segundo aviso at 07:00AM on [FECHA +3 días hábiles]</span>
+          <div class="reminder-text" id="rem-sup-1"></div>
         </div>
       </div>
     </div>
@@ -360,20 +282,18 @@
       <div class="conditional-sub">Selecciona para ver solo los pasos que aplican.</div>
       <div class="conditional-options">
         <button class="cond-btn" id="btn-sup-cs" onclick="selectRoute('sup','cs')">
-          <span class="cond-icon">✅</span>
-          <span class="cond-label">Sí confirmó la supresión</span>
+          <span class="cond-icon">✅</span><span class="cond-label">Sí confirmó la supresión</span>
           <span class="cond-sublabel">Usuario respondió y desea proceder → CS Seniors</span>
         </button>
         <button class="cond-btn" id="btn-sup-fp" onclick="selectRoute('sup','fp')">
-          <span class="cond-icon">⏰</span>
-          <span class="cond-label">No respondió</span>
+          <span class="cond-icon">⏰</span><span class="cond-label">No respondió</span>
           <span class="cond-sublabel">Sin respuesta en el plazo → segundo aviso</span>
         </button>
       </div>
     </div>
     <div id="route-badge-sup"></div>
 
-    <!-- RUTA CS: Usuario confirmó -->
+    <!-- RUTA CS: Confirmó -->
     <div class="section route-cs hidden-route route-label-cs" id="s-sup-cs">
       <div class="section-header" onclick="toggleSection('sup-cs')">
         <span class="section-icon">👤</span>
@@ -384,30 +304,12 @@
       <div class="section-body">
         <div class="info-block success">El usuario confirmó que desea proceder. A partir de aquí gestiona un integrante de CS Seniors.</div>
         <div class="sub-section-label">Remarks y cancelación en BO</div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 2001 + número de ticket</span><span class="check-note">ANTES de modificar cualquier estado en la cuenta</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Activar flag "Locked" en la cuenta</span><span class="check-note">⚠️ NO usar "Locked Withdrawal Allowed"</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Desactivar todos los marks de marketing activos</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Registrar nota al activar el flag: "Supresión de datos | Ticket#___"</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 2001 + número de ticket</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Agregar el caso al control correspondiente</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Registrar remark previo: "Reclamación en trámite" + Código 2001 + número de ticket</span><span class="check-note">ANTES de modificar cualquier estado en la cuenta</span></div></div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Activar flag "Locked" en la cuenta</span><span class="check-note">⚠️ NO usar "Locked Withdrawal Allowed"</span></div></div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Desactivar todos los marks de marketing activos</span></div></div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Registrar nota al activar el flag: "Supresión de datos | Ticket#___"</span></div></div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Registrar remark posterior: "Reclamación resuelta" + Código 2001 + número de ticket</span></div></div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Agregar el caso al control correspondiente</span></div></div>
       </div>
     </div>
 
@@ -421,24 +323,13 @@
       </div>
       <div class="section-body">
         <div class="info-block warn">Primer reminder activado sin respuesta. Plazo del segundo reminder: 🇨🇴 15 días · 🇲🇽 10 días · 🇵🇪 7 días calendario.</div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Enviar macro "SEGUNDO AVISO SUPRESION CO/MX/PE"</span></div>
-        </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Generar segundo reminder en #csdata_reminders inmediatamente después del envío</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Enviar macro "SEGUNDO AVISO SUPRESION CO/MX/PE"</span></div></div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Generar segundo reminder en #csdata_reminders inmediatamente después del envío</span></div></div>
         <div class="reminder-box">
           <button class="copy-btn" onclick="copyReminder(this)">copiar</button>
-          <span class="cc sup-co">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :col: Pending | Segundo aviso at 07:00AM on [FECHA +15 días]</span>
-          <span class="cc sup-mx" style="display:none">/remind @channel Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :flag-mx: Pending | Segundo aviso at 07:00AM on [FECHA +10 días]</span>
-          <span class="cc sup-pe" style="display:none">/remind @channel Tools Ticket #<span class="tkt-sup">XXXX</span> SUPRESIÓN :peruu: Pending | Segundo aviso at 07:00AM on [FECHA +7 días]</span>
+          <div class="reminder-text" id="rem-sup-2"></div>
         </div>
-        <div class="check-item" onclick="toggle(this,'sup')">
-          <div class="check-box"></div>
-          <div><span class="check-label">Validar que la fecha del reminder corresponde a la jurisdicción del usuario</span></div>
-        </div>
+        <div class="check-item" onclick="toggle(this,'sup')"><div class="check-box"></div><div><span class="check-label">Validar que la fecha del reminder corresponde a la jurisdicción del usuario</span></div></div>
         <div class="info-block info">Al recibir la notificación del segundo reminder: si el usuario sigue sin responder → cerrar ticket con nota interna: <em>"Ticket cerrado por la no respuesta del cliente"</em></div>
       </div>
     </div>
@@ -447,9 +338,171 @@
 </div>
 
 <script>
+// ─── ESTADO ───────────────────────────────────────────────
 let currentCountry = { act: 'co', sup: 'co' };
 let currentRoute   = { act: null,  sup: null  };
 
+// ─── FERIADOS PERÚ ────────────────────────────────────────
+// Calcula Semana Santa (Viernes Santo) con algoritmo de Gauss
+function easterFriday(year) {
+  const a = year % 19, b = Math.floor(year/100), c = year % 100;
+  const d = Math.floor(b/4), e = b % 4, f = Math.floor((b+8)/25);
+  const g = Math.floor((b-f+1)/3), h = (19*a+b-d-g+15) % 30;
+  const i = Math.floor(c/4), k = c % 4;
+  const l = (32+2*e+2*i-h-k) % 7;
+  const m = Math.floor((a+11*h+22*l)/451);
+  const month = Math.floor((h+l-7*m+114)/31);
+  const day   = ((h+l-7*m+114) % 31) + 1;
+  // Easter Sunday
+  const sunday = new Date(year, month-1, day);
+  // Good Friday = 2 days before
+  const friday = new Date(sunday);
+  friday.setDate(sunday.getDate() - 2);
+  return friday;
+}
+
+function getPeruHolidays(year) {
+  const ef = easterFriday(year);
+  // Jueves Santo = Viernes Santo - 1
+  const thursdayHoly = new Date(ef);
+  thursdayHoly.setDate(ef.getDate() - 1);
+
+  const fixed = [
+    `${year}-01-01`, // Año Nuevo
+    `${year}-05-01`, // Día del Trabajo
+    `${year}-06-29`, // San Pedro y San Pablo
+    `${year}-07-23`, // Fuerza Aérea (desde 2022 opcional, incluido por precaución)
+    `${year}-07-28`, // Fiestas Patrias
+    `${year}-07-29`, // Fiestas Patrias
+    `${year}-08-06`, // Batalla de Junín (desde 2022)
+    `${year}-08-30`, // Santa Rosa de Lima
+    `${year}-10-08`, // Combate de Angamos
+    `${year}-11-01`, // Todos los Santos
+    `${year}-12-08`, // Inmaculada Concepción
+    `${year}-12-09`, // Batalla de Ayacucho (desde 2022)
+    `${year}-12-25`, // Navidad
+  ];
+
+  const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  return new Set([...fixed, fmt(thursdayHoly), fmt(ef)]);
+}
+
+// ─── CÁLCULO DE FECHAS ────────────────────────────────────
+function toKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function addCalendarDays(from, days) {
+  const d = new Date(from);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+function addBusinessDays(from, days, country) {
+  const d = new Date(from);
+  let added = 0;
+  const holidays = country === 'pe' ? getPeruHolidays(d.getFullYear()) : new Set();
+  while (added < days) {
+    d.setDate(d.getDate() + 1);
+    const dow = d.getDay(); // 0=Dom, 6=Sab
+    if (dow === 0 || dow === 6) continue;
+    if (holidays.has(toKey(d))) continue;
+    // Si el año cambia durante el cálculo, actualizar feriados
+    if (country === 'pe') {
+      const h2 = getPeruHolidays(d.getFullYear());
+      if (h2.has(toKey(d))) continue;
+    }
+    added++;
+  }
+  return d;
+}
+
+function formatDate(d) {
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${days[d.getDay()]} ${months[d.getMonth()]} ${d.getDate()} ${d.getFullYear()}`;
+}
+
+function formatDateES(d) {
+  const dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  return `${dias[d.getDay()]} ${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+}
+
+function getBaseDate(tab) {
+  const val = document.getElementById('date-' + tab).value;
+  if (!val) return null;
+  // Parse as local date (avoid timezone shift)
+  const [y,m,d] = val.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+
+// ─── REMINDERS ────────────────────────────────────────────
+// Definición de todos los reminders con sus reglas
+const REMINDERS = {
+  'act-docs': {
+    tab: 'act',
+    rules: {
+      co: { days: 30, type: 'calendar', flag: ':col:',    suffix: 'Enviar segundo aviso' },
+      mx: { days: 10, type: 'calendar', flag: ':flag-mx:', suffix: 'CERRAR TICKET' },
+      pe: { days:  5, type: 'business', flag: ':peruu:',  suffix: 'CERRAR TICKET' },
+    },
+    template: (ticket, flag, dateStr, suffix) =>
+      `/remind @channel Ticket #${ticket} ACTUALIZACIÓN ${flag} Pending | ${suffix} at 07:00AM on ${dateStr}`,
+  },
+  'sup-1': {
+    tab: 'sup',
+    rules: {
+      co: { days: 15, type: 'calendar', flag: ':col:',    suffix: 'Enviar segundo aviso' },
+      mx: { days:  5, type: 'calendar', flag: ':flag-mx:', suffix: 'segundo aviso' },
+      pe: { days:  3, type: 'business', flag: ':peruu:',  suffix: 'segundo aviso' },
+    },
+    template: (ticket, flag, dateStr, suffix, country) =>
+      `/remind @channel${country === 'pe' ? ' Tools' : ''} Ticket #${ticket} SUPRESIÓN ${flag} Pending | ${suffix} at 07:00AM on ${dateStr}`,
+  },
+  'sup-2': {
+    tab: 'sup',
+    rules: {
+      co: { days: 15, type: 'calendar', flag: ':col:',    suffix: 'Segundo aviso' },
+      mx: { days: 10, type: 'calendar', flag: ':flag-mx:', suffix: 'Segundo aviso' },
+      pe: { days:  7, type: 'calendar', flag: ':peruu:',  suffix: 'Segundo aviso' },
+    },
+    template: (ticket, flag, dateStr, suffix, country) =>
+      `/remind @channel${country === 'pe' ? ' Tools' : ''} Ticket #${ticket} SUPRESIÓN ${flag} Pending | ${suffix} at 07:00AM on ${dateStr}`,
+  },
+};
+
+function buildReminderText(remId) {
+  const def = REMINDERS[remId];
+  const tab = def.tab;
+  const country = currentCountry[tab];
+  const rule = def.rules[country];
+  const ticket = document.getElementById('ticket-' + tab).value.trim() || 'XXXX';
+  const base = getBaseDate(tab);
+
+  let dateStr, notaFecha = '';
+  if (base) {
+    const target = rule.type === 'business'
+      ? addBusinessDays(base, rule.days, country)
+      : addCalendarDays(base, rule.days);
+    dateStr = formatDate(target);
+    notaFecha = `  ← ${formatDateES(target)}`;
+  } else {
+    const typeLabel = rule.type === 'business' ? `${rule.days} días hábiles` : `${rule.days} días`;
+    dateStr = `[FECHA +${typeLabel}]`;
+  }
+
+  return def.template(ticket, rule.flag, dateStr, rule.suffix, country) + notaFecha;
+}
+
+function updateAllReminders() {
+  ['act-docs','sup-1','sup-2'].forEach(id => {
+    const el = document.getElementById('rem-' + id);
+    if (el) el.textContent = buildReminderText(id);
+  });
+}
+
+// ─── UI ───────────────────────────────────────────────────
 function toggle(el, tab) {
   el.classList.toggle('done');
   updateProgress(tab);
@@ -471,10 +524,7 @@ function switchCountry(tab, country, btn) {
   currentCountry[tab] = country;
   btn.closest('.country-bar').querySelectorAll('.country-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.cc').forEach(el => {
-    if (el.classList.contains(tab + '-' + country)) el.style.display = '';
-    else if ([...el.classList].some(c => c.startsWith(tab + '-'))) el.style.display = 'none';
-  });
+  updateAllReminders();
 }
 
 function selectRoute(tab, route) {
@@ -495,15 +545,14 @@ function selectRoute(tab, route) {
   });
 
   const badge = document.getElementById('route-badge-' + tab);
-  if (route === 'cs') {
-    badge.innerHTML = tab === 'act'
-      ? '<span class="route-badge cs">✅ Ruta activa: Gestión directa @csdata</span>'
-      : '<span class="route-badge cs">✅ Ruta activa: Usuario confirmó — CS Seniors</span>';
-  } else {
-    badge.innerHTML = tab === 'act'
-      ? '<span class="route-badge fp">🔀 Ruta activa: Escalamiento a F&P</span>'
-      : '<span class="route-badge fp">⏰ Ruta activa: Sin respuesta — Segundo aviso</span>';
-  }
+  badge.innerHTML = route === 'cs'
+    ? (tab === 'act'
+        ? '<span class="route-badge cs">✅ Ruta activa: Gestión directa @csdata</span>'
+        : '<span class="route-badge cs">✅ Ruta activa: Usuario confirmó — CS Seniors</span>')
+    : (tab === 'act'
+        ? '<span class="route-badge fp">🔀 Ruta activa: Escalamiento a F&P</span>'
+        : '<span class="route-badge fp">⏰ Ruta activa: Sin respuesta — Segundo aviso</span>');
+
   updateProgress(tab);
 }
 
@@ -536,17 +585,12 @@ function updateProgress(tab) {
   else badge.classList.remove('show');
 }
 
-function updateReminders() {
-  const a = document.getElementById('ticket-act').value.trim() || 'XXXX';
-  const s = document.getElementById('ticket-sup').value.trim() || 'XXXX';
-  document.querySelectorAll('.tkt-act').forEach(el => el.textContent = a);
-  document.querySelectorAll('.tkt-sup').forEach(el => el.textContent = s);
-}
-
 function copyReminder(btn) {
   const box = btn.closest('.reminder-box');
-  const visible = [...box.querySelectorAll('.cc')].find(el => el.style.display !== 'none');
-  const text = (visible || box).textContent.replace('copiar','').replace('✓ copiado','').trim();
+  const textEl = box.querySelector('.reminder-text');
+  // Copy only the /remind line (before the ← nota)
+  const full = textEl ? textEl.textContent : '';
+  const text = full.split('  ←')[0].trim();
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = '✓ copiado';
     setTimeout(() => btn.textContent = 'copiar', 2000);
@@ -558,6 +602,8 @@ function resetAll() {
   document.querySelectorAll('.check-item').forEach(i => i.classList.remove('done'));
   document.getElementById('ticket-act').value = '';
   document.getElementById('ticket-sup').value = '';
+  document.getElementById('date-act').value = '';
+  document.getElementById('date-sup').value = '';
   document.getElementById('analystName').value = '';
   ['act','sup'].forEach(tab => {
     currentRoute[tab] = null;
@@ -572,9 +618,16 @@ function resetAll() {
     });
     updateProgress(tab);
   });
-  updateReminders();
+  updateAllReminders();
 }
 
+// Init
+const today = new Date();
+const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+document.getElementById('date-act').value = todayStr;
+document.getElementById('date-sup').value = todayStr;
+
+updateAllReminders();
 updateProgress('act');
 updateProgress('sup');
 </script>
