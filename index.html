@@ -417,10 +417,15 @@ function addBusinessDays(from, days, country) {
   return d;
 }
 
+function ordinal(n) {
+  const s = ['th','st','nd','rd'];
+  const v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
+
 function formatDate(d) {
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  return `${days[d.getDay()]} ${months[d.getMonth()]} ${d.getDate()} ${d.getFullYear()}`;
+  return `${months[d.getMonth()]} ${ordinal(d.getDate())} ${d.getFullYear()}`;
 }
 
 function formatDateES(d) {
