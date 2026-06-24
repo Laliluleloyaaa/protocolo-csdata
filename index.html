@@ -148,6 +148,25 @@
   .senior-icon{font-size:24px;color:var(--p-t);flex-shrink:0;margin-top:2px;}
   .senior-title{font-size:15px;font-weight:500;color:var(--p-t);margin-bottom:4px;}
   .senior-sub{font-size:14px;color:var(--t2);line-height:1.6;}
+  .dato-check-label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--t1);cursor:pointer;background:var(--bg3);border:1px solid var(--bd);border-radius:6px;padding:5px 10px;transition:all .15s;user-select:none;}
+  .dato-check-label:hover{border-color:var(--bd2);}
+  .dato-check-label input{accent-color:var(--accent2);width:14px;height:14px;cursor:pointer;}
+  .dato-check-label:has(input:checked){border-color:var(--accent2);background:var(--s-bg);color:var(--s-t);}
+
+  /* Vista simplificada */
+  .simple-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;margin-bottom:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .simple-card-title{font-size:14px;font-weight:500;color:var(--t1);}
+  .simple-card-sub{font-size:12px;color:var(--t2);font-family:var(--mono);margin-top:2px;}
+  .simple-btn{display:flex;align-items:center;gap:6px;font-size:14px;padding:8px 16px;background:var(--i-bg);border:1px solid var(--i-bd);border-radius:6px;color:var(--i-t);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;}
+  .simple-btn:hover{opacity:.8;}
+  .simple-btn:disabled{opacity:.3;cursor:not-allowed;}
+  .simple-btn.remark-s{background:var(--bg3);border-color:var(--bd2);color:var(--t2);}
+  .simple-btn.remark-s:hover{border-color:var(--accent);color:var(--accent);}
+  .simple-section-title{font-size:12px;font-family:var(--mono);color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin:16px 0 8px;}
+  .view-full-content{}
+  .view-simple-content{display:none;}
+  body.simple-view .view-full-content{display:none;}
+  body.simple-view .view-simple-content{display:block;}
 </style>
 </head>
 <body>
@@ -158,6 +177,10 @@
     <div class="lang-toggle">
       <button class="lang-btn active" id="lang-es" onclick="setLang('es')"><i class="ti ti-language"></i> Español</button>
       <button class="lang-btn" id="lang-en" onclick="setLang('en')">English</button>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="view-full" onclick="setView('full')"><i class="ti ti-layout-list"></i> Ampliada</button>
+      <button class="lang-btn" id="view-simple" onclick="setView('simple')"><i class="ti ti-bolt"></i> Simplificada</button>
     </div>
     <button class="reset-btn" onclick="resetAll()"><i class="ti ti-refresh"></i> Nuevo caso</button>
   </div>
@@ -193,6 +216,9 @@
       <button class="cbtn" onclick="setCountry('act','mx',this)">🇲🇽 México</button>
       <button class="cbtn" onclick="setCountry('act','pe',this)">🇵🇪 Perú</button>
     </div>
+
+    <!-- VISTA AMPLIADA -->
+    <div class="view-full-content">
 
     <!-- REMINDERS ACTUALIZACIÓN -->
     <div class="reminders-stack">
@@ -242,14 +268,14 @@
         <span class="remarks-title">Remarks en BO</span>
       </div>
       <div class="remarks-body">
-        <div class="remark-dato-row" style="padding:8px 16px 4px;">
-          <label>Dato actualizado:</label>
-          <select class="dato-select" id="dato-act" onchange="updateRemarks()">
-            <option value="Correo electrónico">Correo electrónico</option>
-            <option value="Número de teléfono">Número de teléfono</option>
-            <option value="Dirección de residencia">Dirección de residencia</option>
-            <option value="Fecha de nacimiento">Fecha de nacimiento</option>
-          </select>
+        <div style="padding:8px 16px 10px;">
+          <div style="font-size:12px;color:var(--t2);font-family:var(--mono);margin-bottom:8px;">Dato(s) actualizado(s):</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;" id="dato-checks-full">
+            <label class="dato-check-label"><input type="checkbox" value="Correo electrónico" onchange="syncDatoFull();updateRemarks()"> Correo electrónico</label>
+            <label class="dato-check-label"><input type="checkbox" value="Número de teléfono" onchange="syncDatoFull();updateRemarks()"> Número de teléfono</label>
+            <label class="dato-check-label"><input type="checkbox" value="Dirección de residencia" onchange="syncDatoFull();updateRemarks()"> Dirección de residencia</label>
+            <label class="dato-check-label"><input type="checkbox" value="Fecha de nacimiento" onchange="syncDatoFull();updateRemarks()"> Fecha de nacimiento</label>
+          </div>
         </div>
         <div class="remark-item">
           <div class="remark-label">Remark previo — antes de actualizar</div>
@@ -267,6 +293,25 @@
           <button class="remark-copy" onclick="copyRemark('remark-post',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
         </div>
       </div>
+    </div>
+
+    </div><!-- /view-full-content -->
+
+    <!-- VISTA SIMPLIFICADA -->
+    <div class="view-simple-content" id="simple-act">
+      <div class="simple-section-title">Reminders</div>
+      <div id="simple-rem-act"></div>
+      <div class="simple-section-title" style="margin-top:20px">Remarks en BO</div>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:12px;color:var(--t2);font-family:var(--mono);margin-bottom:8px;">Dato(s) actualizado(s):</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;" id="dato-checks-simple">
+          <label class="dato-check-label"><input type="checkbox" value="Correo electrónico" onchange="syncDatoSimple()"> Correo electrónico</label>
+          <label class="dato-check-label"><input type="checkbox" value="Número de teléfono" onchange="syncDatoSimple()"> Número de teléfono</label>
+          <label class="dato-check-label"><input type="checkbox" value="Dirección de residencia" onchange="syncDatoSimple()"> Dirección de residencia</label>
+          <label class="dato-check-label"><input type="checkbox" value="Fecha de nacimiento" onchange="syncDatoSimple()"> Fecha de nacimiento</label>
+        </div>
+      </div>
+      <div id="simple-rem-remarks"></div>
     </div>
 
   </div>
@@ -345,7 +390,103 @@
 <script>
 let country = { act: 'co', sup: 'co' };
 let supRoute = null;
-let slackLang = 'es'; // 'es' = @canal, 'en' = @channel
+let slackLang = 'es';
+let currentView = 'full';
+
+function setView(v) {
+  currentView = v;
+  document.getElementById('view-full').className = 'lang-btn' + (v === 'full' ? ' active' : '');
+  document.getElementById('view-simple').className = 'lang-btn' + (v === 'simple' ? ' active' : '');
+  if (v === 'simple') {
+    document.body.classList.add('simple-view');
+  } else {
+    document.body.classList.remove('simple-view');
+  }
+  renderSimpleView();
+}
+
+function getDato() {
+  // Lee checkboxes de la vista activa
+  const fullChecks = document.querySelectorAll('#dato-checks-full input:checked');
+  const simpleChecks = document.querySelectorAll('#dato-checks-simple input:checked');
+  const checks = fullChecks.length > 0 ? fullChecks : simpleChecks;
+  const vals = [...checks].map(c => c.value);
+  return vals.length > 0 ? vals.join(', ') : 'Correo electrónico';
+}
+
+function syncDatoSimple() {
+  // Sincronizar checkboxes entre vistas
+  const simpleChecks = document.querySelectorAll('#dato-checks-simple input');
+  simpleChecks.forEach(sc => {
+    const fc = document.querySelector(`#dato-checks-full input[value="${sc.value}"]`);
+    if (fc) fc.checked = sc.checked;
+  });
+  updateRemarks();
+  renderSimpleView();
+}
+
+function syncDatoFull() {
+  const fullChecks = document.querySelectorAll('#dato-checks-full input');
+  fullChecks.forEach(fc => {
+    const sc = document.querySelector(`#dato-checks-simple input[value="${fc.value}"]`);
+    if (sc) sc.checked = fc.checked;
+  });
+}
+
+function renderSimpleView() {
+  renderSimpleReminders();
+  renderSimpleRemarks();
+}
+
+function renderSimpleReminders() {
+  const el = document.getElementById('simple-rem-act');
+  if (!el) return;
+  const remIds = ['act-1', 'act-2'];
+  el.innerHTML = remIds.map(id => {
+    const card = document.getElementById('rcard-' + id);
+    if (!card || card.classList.contains('hidden')) return '';
+    const titleEl = document.getElementById('rtitle-' + id) || card.querySelector('.rem-card-title');
+    const title = titleEl ? titleEl.textContent.trim() : id;
+    const textEl = document.getElementById('rtext-' + id);
+    const copyDisabled = !textEl || !textEl.textContent || textEl.textContent.includes('[FECHA');
+    return `<div class="simple-card">
+      <div>
+        <div class="simple-card-title">${title}</div>
+      </div>
+      <button class="simple-btn" ${copyDisabled ? 'disabled' : ''} onclick="copySimple('rtext-${id}',this)">
+        <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function renderSimpleRemarks() {
+  const el = document.getElementById('simple-rem-remarks');
+  if (!el) return;
+  const items = [
+    { id: 'remark-pre',   label: 'Remark previo' },
+    { id: 'remark-popup', label: 'Nota pop-up' },
+    { id: 'remark-post',  label: 'Remark posterior' },
+  ];
+  el.innerHTML = items.map(item => `
+    <div class="simple-card">
+      <div>
+        <div class="simple-card-title">${item.label}</div>
+      </div>
+      <button class="simple-btn remark-s" onclick="copySimple('${item.id}',this)">
+        <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+      </button>
+    </div>`).join('');
+}
+
+function copySimple(elId, btn) {
+  const el = document.getElementById(elId);
+  if (!el || btn.disabled) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+    btn.innerHTML = '<i class="ti ti-check" style="font-size:14px"></i> ¡Copiado!';
+    setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:14px"></i> Copiar', 2000);
+  });
+} // 'es' = @canal, 'en' = @channel
 
 function setLang(lang) {
   slackLang = lang;
@@ -584,11 +725,12 @@ function updateAll() {
     }
   });
   updateRemarks();
+  renderSimpleView();
 }
 
 function updateRemarks() {
   const ticket = document.getElementById('t-act').value.trim() || 'XXXXX';
-  const dato = document.getElementById('dato-act') ? document.getElementById('dato-act').value : 'Correo electrónico';
+  const dato = getDato();
   const pre = `"Reclamación en trámite"
 Actualización de datos: ${dato}
 "Código 601 - CONTRA EL RESPONSABLE - RESPECTO DE LA ACTUALIZACIÓN DE LA INFORMACIÓN - Actualizar oportunamente la información en las bases de datos"
@@ -640,7 +782,7 @@ function resetAll() {
   document.getElementById('t-sup').value = '';
   document.getElementById('d-act').value = todayStr;
   document.getElementById('d-sup').value = todayStr;
-  document.getElementById('rcard-act-main').style.borderColor = '';
+
   document.getElementById('warn-crit').classList.add('hidden');
   document.getElementById('rcard-sup-2').classList.add('hidden');
 
@@ -651,7 +793,7 @@ function resetAll() {
   document.getElementById('btn-sup').className = 'type-btn';
   document.getElementById('main-act').className = 'main';
   document.getElementById('main-sup').className = 'main';
-  if (document.getElementById('dato-act')) document.getElementById('dato-act').selectedIndex = 0;
+  document.querySelectorAll('#dato-checks-full input, #dato-checks-simple input').forEach(c => c.checked = false);
   updateAll();
 }
 
