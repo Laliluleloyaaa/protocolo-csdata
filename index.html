@@ -156,6 +156,7 @@
   .senior-title{font-size:15px;font-weight:500;color:var(--p-t);margin-bottom:4px;}
   .senior-sub{font-size:14px;color:var(--t2);line-height:1.6;}
   .remarks-block-sup::before{background:linear-gradient(90deg,var(--w-t),transparent);}
+  body.senior-role .remarks-block-sup{margin-top:4px;}
   .dato-check-label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--t1);cursor:pointer;background:var(--bg3);border:1px solid var(--bd);border-radius:6px;padding:5px 10px;transition:all .15s;user-select:none;}
   .dato-check-label:hover{border-color:var(--bd2);}
   .dato-check-label input{accent-color:var(--accent2);width:14px;height:14px;cursor:pointer;}
@@ -182,10 +183,10 @@
   body.simple-view .view-simple-content{display:block;}
   /* Vista senior: muestra todo incluyendo exclusivos */
   /* Vista csdata: oculta exclusivos de senior */
-  .senior-only { display: none; }
   body.senior-role .senior-only { display: block; }
   body.senior-role .simple-card.senior-only { display: flex; }
-  body.senior-role div.senior-only { display: block; }
+  body.senior-role div.senior-only { display: block !important; }
+  .senior-only { display: none !important; }
   /* view-senior-content nunca se usa como toggle de display, se controla por senior-only */
   .view-senior-content { display: contents; }
 </style>
@@ -404,7 +405,7 @@
         </div>
       </div>
       <!-- REMARKS SUPRESIÓN -->
-      <div class="remarks-block senior-only remarks-block-sup" style="margin-top:4px;">
+      <div class="remarks-block senior-only remarks-block-sup">
         <div class="remarks-header">
           <i class="ti ti-notes" style="font-size:16px;color:var(--t2)"></i>
           <span class="remarks-title">Remarks en BO</span>
@@ -444,24 +445,26 @@
           <i class="ti ti-copy" style="font-size:14px"></i> Copiar
         </button>
       </div>
-      <div class="simple-section-title with-sep" style="margin-top:0">Remarks en BO</div>
-      <div class="simple-card">
-        <div><div class="simple-card-title">Remark previo</div></div>
-        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-pre',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
-      </div>
-      <div class="simple-card">
-        <div><div class="simple-card-title">Nota flag Locked</div></div>
-        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-flag',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
-      </div>
-      <div class="simple-card">
-        <div><div class="simple-card-title">Remark posterior</div></div>
-        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-post',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
+      <div class="senior-only" style="display:none">
+        <div class="simple-section-title with-sep" style="margin-top:0">Remarks en BO</div>
+        <div class="simple-card">
+          <div><div class="simple-card-title">Remark previo</div></div>
+          <button class="simple-btn remark-s" onclick="copySimple('sup-remark-pre',this)">
+            <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+          </button>
+        </div>
+        <div class="simple-card">
+          <div><div class="simple-card-title">Nota flag Locked</div></div>
+          <button class="simple-btn remark-s" onclick="copySimple('sup-remark-flag',this)">
+            <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+          </button>
+        </div>
+        <div class="simple-card">
+          <div><div class="simple-card-title">Remark posterior</div></div>
+          <button class="simple-btn remark-s" onclick="copySimple('sup-remark-post',this)">
+            <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+          </button>
+        </div>
       </div>
     </div>
   </div>
