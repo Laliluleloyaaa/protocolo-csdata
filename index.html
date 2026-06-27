@@ -56,22 +56,23 @@
   .cbtn{background:var(--bg2);border:1px solid var(--bd);border-radius:6px;color:var(--t2);cursor:pointer;font-size:14px;padding:6px 14px;transition:all .2s;}
   .cbtn.active{border-color:var(--i-bd);color:var(--i-t);background:var(--i-bg);}
 
-  .reminder-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;margin-bottom:12px;overflow:hidden;transition:border-color .2s;}
+  .reminder-card{background:var(--bg2);border:1px solid var(--bd2);border-radius:10px;margin-bottom:12px;overflow:hidden;transition:border-color .2s;}
   .reminder-card.needs-input{border-color:var(--w-bd);}
-  .rem-card-header{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--bd);}
+  .rem-card-header{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--bd2);background:var(--bg3);}
   .rem-card-title{flex:1;font-size:15px;font-weight:500;}
   .rem-tag{font-size:12px;padding:2px 8px;border-radius:20px;border:1px solid var(--bd);color:var(--t3);font-family:var(--mono);}
   .rem-tag.always{background:var(--i-bg);border-color:var(--i-bd);color:var(--i-t);}
   .rem-tag.conditional{background:var(--w-bg);border-color:var(--w-bd);color:var(--w-t);}
-  .rem-body{padding:12px 16px;}
+  .rem-body{padding:14px 16px;background:var(--bg);}
   .rem-missing{font-size:13px;color:var(--w-t);display:flex;align-items:center;gap:5px;margin-bottom:8px;font-family:var(--mono);}
   .rem-text{font-family:var(--mono);font-size:13px;color:var(--i-t);white-space:pre-wrap;word-break:break-all;line-height:1.7;margin-bottom:4px;}
   .rem-date-note{font-size:13px;color:var(--t2);font-family:var(--mono);margin-bottom:10px;}
   .rem-actions{display:flex;gap:8px;flex-wrap:wrap;}
-  .copy-btn{display:flex;align-items:center;gap:5px;font-size:14px;padding:7px 14px;background:var(--i-bg);border:1px solid var(--i-bd);border-radius:6px;color:var(--i-t);cursor:pointer;transition:all .2s;}
-  .copy-btn:hover{opacity:.8;}
-  .copy-btn:disabled{opacity:.3;cursor:not-allowed;}
-  .sent-btn{display:flex;align-items:center;gap:5px;font-size:14px;padding:7px 14px;background:transparent;border:1px solid var(--bd);border-radius:6px;color:var(--t2);cursor:pointer;transition:all .2s;}
+  .copy-btn{display:flex;align-items:center;gap:6px;font-size:14px;padding:9px 18px;background:var(--i-t);border:1px solid var(--i-bd);border-radius:8px;color:#0f1117;cursor:pointer;transition:all .2s;font-weight:600;}
+  .copy-btn:hover{background:#6ba3f9;transform:translateY(-1px);box-shadow:0 4px 12px rgba(79,142,247,.3);}
+  .copy-btn:active{transform:translateY(0);}
+  .copy-btn:disabled{opacity:.25;cursor:not-allowed;transform:none;box-shadow:none;}
+  .sent-btn{display:flex;align-items:center;gap:5px;font-size:14px;padding:9px 18px;background:transparent;border:1px solid var(--bd2);border-radius:8px;color:var(--t2);cursor:pointer;transition:all .2s;}
   .sent-btn:hover{border-color:var(--s-bd);color:var(--s-t);background:var(--s-bg);}
   .sent-btn.done{border-color:var(--s-bd);color:var(--s-t);background:var(--s-bg);cursor:default;}
 
@@ -130,20 +131,20 @@
   .lang-btn:hover:not(.active){color:var(--t1);}
   .reminders-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
   .rem-num{font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
-  .remarks-block{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;margin-bottom:12px;overflow:hidden;}
-  .remarks-header{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--bd);}
+  .remarks-block{background:var(--bg2);border:1px solid var(--bd2);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+  .remarks-header{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--bd2);background:var(--bg3);}
   .remarks-title{flex:1;font-size:15px;font-weight:500;}
   .remarks-body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
-  .remark-item{background:var(--bg3);border:1px solid var(--bd);border-radius:8px;overflow:hidden;}
+  .remark-item{background:var(--bg);border:1px solid var(--bd2);border-radius:8px;overflow:hidden;}
   .remark-label{font-size:12px;color:var(--t3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:8px 12px 4px;}
   .remark-dato-row{display:flex;align-items:center;gap:8px;padding:4px 12px 8px;}
   .remark-dato-row label{font-size:11px;color:var(--t2);white-space:nowrap;}
   .dato-select{background:var(--bg2);border:1px solid var(--bd);border-radius:4px;color:var(--t1);font-family:var(--mono);font-size:13px;padding:3px 8px;outline:none;cursor:pointer;}
   .dato-select:focus{border-color:var(--accent);}
-  .remark-text{font-family:var(--mono);font-size:13px;color:var(--t2);padding:8px 12px;line-height:1.8;white-space:pre-wrap;border-top:1px solid var(--bd);}
+  .remark-text{font-family:var(--mono);font-size:13px;color:var(--t1);padding:10px 12px;line-height:1.8;white-space:pre-wrap;border-top:1px solid var(--bd2);}
   .remark-text .ticket-span{color:var(--accent);}
-  .remark-copy{display:flex;align-items:center;gap:5px;font-size:13px;padding:5px 12px 8px;background:transparent;border:none;color:var(--t3);cursor:pointer;font-family:var(--mono);}
-  .remark-copy:hover{color:var(--accent);}
+  .remark-copy{display:flex;align-items:center;gap:5px;font-size:12px;padding:6px 12px 8px;background:transparent;border:none;color:var(--accent);cursor:pointer;font-family:var(--mono);font-weight:500;}
+  .remark-copy:hover{color:#6ba3f9;}
   .info-senior{display:flex;align-items:flex-start;gap:14px;background:var(--p-bg);border:1px solid var(--p-bd);border-radius:10px;padding:16px 18px;margin-bottom:12px;}
   .senior-icon{font-size:24px;color:var(--p-t);flex-shrink:0;margin-top:2px;}
   .senior-title{font-size:15px;font-weight:500;color:var(--p-t);margin-bottom:4px;}
@@ -157,16 +158,21 @@
   .simple-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;margin-bottom:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .simple-card-title{font-size:14px;font-weight:500;color:var(--t1);}
   .simple-card-sub{font-size:12px;color:var(--t2);font-family:var(--mono);margin-top:2px;}
-  .simple-btn{display:flex;align-items:center;gap:6px;font-size:14px;padding:8px 16px;background:var(--i-bg);border:1px solid var(--i-bd);border-radius:6px;color:var(--i-t);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;}
-  .simple-btn:hover{opacity:.8;}
-  .simple-btn:disabled{opacity:.3;cursor:not-allowed;}
-  .simple-btn.remark-s{background:var(--bg3);border-color:var(--bd2);color:var(--t2);}
-  .simple-btn.remark-s:hover{border-color:var(--accent);color:var(--accent);}
+  .simple-btn{display:flex;align-items:center;gap:6px;font-size:14px;padding:9px 18px;background:var(--i-t);border:1px solid var(--i-bd);border-radius:8px;color:#0f1117;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;font-weight:600;}
+  .simple-btn:hover{background:#6ba3f9;transform:translateY(-1px);box-shadow:0 4px 12px rgba(79,142,247,.3);}
+  .simple-btn:active{transform:translateY(0);}
+  .simple-btn:disabled{opacity:.25;cursor:not-allowed;transform:none;box-shadow:none;}
+  .simple-btn.remark-s{background:var(--bg3);border-color:var(--bd2);color:var(--t2);font-weight:500;}
+  .simple-btn.remark-s:hover{border-color:var(--accent);color:var(--accent);background:var(--i-bg);box-shadow:none;transform:none;}
   .simple-section-title{font-size:12px;font-family:var(--mono);color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin:16px 0 8px;}
   .view-full-content{}
   .view-simple-content{display:none;}
+  .view-senior-content{display:none;}
   body.simple-view .view-full-content{display:none;}
   body.simple-view .view-simple-content{display:block;}
+  body.senior-view .view-full-content{display:none;}
+  body.senior-view .view-simple-content{display:none;}
+  body.senior-view .view-senior-content{display:block;}
 </style>
 </head>
 <body>
@@ -181,6 +187,9 @@
     <div class="lang-toggle">
       <button class="lang-btn active" id="view-full" onclick="setView('full')"><i class="ti ti-layout-list"></i> Ampliada</button>
       <button class="lang-btn" id="view-simple" onclick="setView('simple')"><i class="ti ti-bolt"></i> Simplificada</button>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="view-senior" onclick="setView('senior')"><i class="ti ti-user-star"></i> Seniors</button>
     </div>
     <button class="reset-btn" onclick="resetAll()"><i class="ti ti-refresh"></i> Nuevo caso</button>
   </div>
@@ -297,6 +306,11 @@
 
     </div><!-- /view-full-content -->
 
+    <!-- VISTA SENIORS ACT -->
+    <div class="view-senior-content" id="senior-act">
+      <div id="senior-act-content"></div>
+    </div>
+
     <!-- VISTA SIMPLIFICADA -->
     <div class="view-simple-content" id="simple-act">
       <div class="simple-section-title">Reminders</div>
@@ -319,7 +333,7 @@
   <!-- ===== SUPRESIÓN ===== -->
   <div class="main" id="main-sup">
     <div class="fields-row">
-      <div class="field-group"><label>Ticket #</label><input type="text" class="ticket-in" id="t-sup" placeholder="XXXXXX" oninput="updateAll()"></div>
+      <div class="field-group"><label>Ticket #</label><input type="text" class="ticket-in" id="t-sup" placeholder="XXXXXX" oninput="updateAll();updateSupRemarks()"></div>
       <div class="field-group"><label>Fecha inicio</label><input type="date" class="date-in" id="d-sup" oninput="updateAll()"></div>
     </div>
     <div class="country-bar">
@@ -328,59 +342,130 @@
       <button class="cbtn" onclick="setCountry('sup','pe',this)">🇵🇪 Perú</button>
     </div>
 
-    <div class="reminder-card" id="rcard-sup-1">
-      <div class="rem-card-header">
-        <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
-        <span class="rem-card-title">Reminder — primer aviso</span>
-        <span class="rem-tag always"><i class="ti ti-check" style="font-size:11px"></i> Siempre al enviar la macro</span>
-      </div>
-      <div class="rem-body">
-        <div class="rem-missing hidden" id="miss-sup-1"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
-        <div class="rem-text" id="rtext-sup-1"></div>
-        <div class="rem-date-note" id="rnote-sup-1"></div>
-        <div class="rem-actions">
-          <button class="copy-btn" id="rcopy-sup-1" onclick="copyR('rtext-sup-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-          <button class="sent-btn" id="rsent-sup-1" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
+    <!-- VISTA AMPLIADA SUP -->
+    <div class="view-full-content">
+      <div class="reminder-card" id="rcard-sup-1">
+        <div class="rem-card-header">
+          <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
+          <span class="rem-card-title">Reminder — primer aviso</span>
+          <span class="rem-tag always"><i class="ti ti-check" style="font-size:11px"></i> Siempre al enviar la macro</span>
+        </div>
+        <div class="rem-body">
+          <div class="rem-missing hidden" id="miss-sup-1"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
+          <div class="rem-text" id="rtext-sup-1"></div>
+          <div class="rem-date-note" id="rnote-sup-1"></div>
+          <div class="rem-actions">
+            <button class="copy-btn" id="rcopy-sup-1" onclick="copyR('rtext-sup-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
+            <button class="sent-btn" id="rsent-sup-1" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="cond-block">
-      <div class="cond-q">¿El usuario respondió y confirmó la supresión?</div>
-      <div class="cond-opts">
-        <button class="cond-opt" id="co-sup-yes" onclick="setSupRoute('yes')">
-          <span class="cond-icon"><i class="ti ti-circle-check"></i></span>
-          <span class="cond-lbl">Sí confirmó</span>
-        </button>
-        <button class="cond-opt" id="co-sup-no" onclick="setSupRoute('no')">
-          <span class="cond-icon"><i class="ti ti-clock"></i></span>
-          <span class="cond-lbl">No respondió</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="info-senior" id="senior-notice">
-      <div class="senior-icon"><i class="ti ti-user-star"></i></div>
-      <div>
-        <div class="senior-title">Gestión exclusiva CS Seniors</div>
-        <div class="senior-sub">Si el usuario confirma la supresión, el caso debe ser gestionado por un integrante de CS Seniors. Proceder con la cancelación en BO según el protocolo.</div>
-      </div>
-    </div>
-
-    <div class="reminder-card hidden" id="rcard-sup-2">
-      <div class="rem-card-header">
-        <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
-        <span class="rem-card-title">Reminder — segundo aviso</span>
-        <span class="rem-tag conditional"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Sin respuesta del usuario</span>
-      </div>
-      <div class="rem-body">
-        <div class="rem-missing hidden" id="miss-sup-2"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
-        <div class="rem-text" id="rtext-sup-2"></div>
-        <div class="rem-date-note" id="rnote-sup-2"></div>
-        <div class="rem-actions">
-          <button class="copy-btn" id="rcopy-sup-2" onclick="copyR('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-          <button class="sent-btn" id="rsent-sup-2" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
+      <div class="reminder-card" id="rcard-sup-2">
+        <div class="rem-card-header">
+          <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
+          <span class="rem-card-title">Reminder — segundo aviso</span>
+          <span class="rem-tag conditional"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Sin respuesta del usuario</span>
         </div>
+        <div class="rem-body">
+          <div class="rem-missing hidden" id="miss-sup-2"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
+          <div class="rem-text" id="rtext-sup-2"></div>
+          <div class="rem-date-note" id="rnote-sup-2"></div>
+          <div class="rem-actions">
+            <button class="copy-btn" id="rcopy-sup-2" onclick="copyR('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
+            <button class="sent-btn" id="rsent-sup-2" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
+          </div>
+        </div>
+      </div>
+      <!-- REMARKS SUPRESIÓN -->
+      <div class="remarks-block" style="margin-top:4px;">
+        <div class="remarks-header">
+          <i class="ti ti-notes" style="font-size:16px;color:var(--t2)"></i>
+          <span class="remarks-title">Remarks en BO</span>
+        </div>
+        <div class="remarks-body">
+          <div class="remark-item">
+            <div class="remark-label">Remark previo — antes de gestionar</div>
+            <div class="remark-text" id="sup-remark-pre"></div>
+            <button class="remark-copy" onclick="copyRemark('sup-remark-pre',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
+          </div>
+          <div class="remark-item">
+            <div class="remark-label">Nota al activar flag Locked</div>
+            <div class="remark-text" id="sup-remark-flag"></div>
+            <button class="remark-copy" onclick="copyRemark('sup-remark-flag',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
+          </div>
+          <div class="remark-item">
+            <div class="remark-label">Remark posterior — después de gestionar</div>
+            <div class="remark-text" id="sup-remark-post"></div>
+            <button class="remark-copy" onclick="copyRemark('sup-remark-post',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- /view-full-content sup -->
+
+    <!-- VISTA SENIORS SUP -->
+    <div class="view-senior-content" id="senior-sup">
+      <div class="simple-section-title">Reminder — exclusivo Seniors</div>
+      <div class="simple-card">
+        <div><div class="simple-card-title" id="senior-ssub-sup-2">Reminder — segundo aviso</div></div>
+        <button class="simple-btn" id="senior-scopy-sup-2" onclick="copySimple('rtext-sup-2',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+      <div class="simple-section-title" style="margin-top:20px">Remarks en BO — exclusivo Seniors</div>
+      <div class="simple-card">
+        <div><div class="simple-card-title">Remark previo</div></div>
+        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-pre',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+      <div class="simple-card">
+        <div><div class="simple-card-title">Nota flag Locked</div></div>
+        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-flag',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+      <div class="simple-card">
+        <div><div class="simple-card-title">Remark posterior</div></div>
+        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-post',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+    </div>
+
+    <!-- VISTA SIMPLIFICADA SUP -->
+    <div class="view-simple-content" id="simple-sup">
+      <div class="simple-section-title">Reminders</div>
+      <div class="simple-card">
+        <div><div class="simple-card-title" id="ssub-sup-1">Reminder — primer aviso</div></div>
+        <button class="simple-btn" id="scopy-sup-1" onclick="copySimple('rtext-sup-1',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+      <div class="simple-card" id="simple-sup-r2">
+        <div><div class="simple-card-title" id="ssub-sup-2">Reminder — segundo aviso</div></div>
+        <button class="simple-btn" id="scopy-sup-2" onclick="copySimple('rtext-sup-2',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+      <div class="simple-section-title" style="margin-top:20px">Remarks en BO</div>
+      <div class="simple-card">
+        <div><div class="simple-card-title">Remark previo</div></div>
+        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-pre',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+      <div class="simple-card">
+        <div><div class="simple-card-title">Nota flag Locked</div></div>
+        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-flag',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
+      </div>
+      <div class="simple-card">
+        <div><div class="simple-card-title">Remark posterior</div></div>
+        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-post',this)">
+          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+        </button>
       </div>
     </div>
   </div>
@@ -397,12 +482,12 @@ function setView(v) {
   currentView = v;
   document.getElementById('view-full').className = 'lang-btn' + (v === 'full' ? ' active' : '');
   document.getElementById('view-simple').className = 'lang-btn' + (v === 'simple' ? ' active' : '');
-  if (v === 'simple') {
-    document.body.classList.add('simple-view');
-  } else {
-    document.body.classList.remove('simple-view');
-  }
+  document.getElementById('view-senior').className = 'lang-btn' + (v === 'senior' ? ' active' : '');
+  document.body.classList.remove('simple-view','senior-view');
+  if (v === 'simple') document.body.classList.add('simple-view');
+  if (v === 'senior') document.body.classList.add('senior-view');
   renderSimpleView();
+  renderSeniorView();
 }
 
 function getDato() {
@@ -422,7 +507,9 @@ function syncDatoSimple() {
     if (fc) fc.checked = sc.checked;
   });
   updateRemarks();
+  updateSupRemarks();
   renderSimpleView();
+  renderSeniorView();
 }
 
 function syncDatoFull() {
@@ -458,6 +545,69 @@ function renderSimpleReminders() {
       </button>
     </div>`;
   }).join('');
+
+  // Actualizar estado de botones de sup en vista simple
+  const r1Text = document.getElementById('rtext-sup-1');
+  const r1Disabled = !r1Text || r1Text.textContent.includes('[FECHA');
+  const scopy1 = document.getElementById('scopy-sup-1');
+  if (scopy1) scopy1.disabled = r1Disabled;
+
+  const r2Text = document.getElementById('rtext-sup-2');
+  const r2Disabled = !r2Text || r2Text.textContent.includes('[FECHA');
+  const scopy2 = document.getElementById('scopy-sup-2');
+  if (scopy2) scopy2.disabled = r2Disabled;
+
+  // Título con plazo incluido según país
+  const supLabels = {
+    co: { r1: 'Reminder — primer aviso — 15 días',   r2: 'Reminder — segundo aviso — 15 días' },
+    mx: { r1: 'Reminder — primer aviso — 5 días',    r2: 'Reminder — segundo aviso — 10 días' },
+    pe: { r1: 'Reminder — primer aviso — 3 días hábiles', r2: 'Reminder — segundo aviso — 7 días' },
+  };
+  const c = country['sup'];
+  const lbl = supLabels[c] || supLabels['co'];
+  const sub1 = document.getElementById('ssub-sup-1');
+  const sub2 = document.getElementById('ssub-sup-2');
+  if (sub1) sub1.textContent = lbl.r1;
+  if (sub2) sub2.textContent = lbl.r2;
+}
+
+function renderSeniorView() {
+  // ACTUALIZACIÓN — solo reminder 2 (solo CO)
+  const seniorActEl = document.getElementById('senior-act-content');
+  if (seniorActEl) {
+    const c = country['act'];
+    if (c === 'co') {
+      const textEl = document.getElementById('rtext-act-2');
+      const disabled = !textEl || textEl.textContent.includes('[FECHA');
+      const titleEl = document.getElementById('rtitle-act-2') || { textContent: 'Reminder — cierre de ticket — 30 días' };
+      seniorActEl.innerHTML = `
+        <div class="simple-section-title">Reminder — exclusivo Seniors</div>
+        <div class="simple-card">
+          <div><div class="simple-card-title">Reminder — cierre de ticket — 30 días</div></div>
+          <button class="simple-btn" ${disabled?'disabled':''} onclick="copySimple('rtext-act-2',this)">
+            <i class="ti ti-copy" style="font-size:14px"></i> Copiar
+          </button>
+        </div>`;
+    } else {
+      seniorActEl.innerHTML = `<div style="padding:20px 0;color:var(--t3);font-size:13px;font-family:var(--mono);">No hay pasos exclusivos de Seniors para este país en actualización.</div>`;
+    }
+  }
+
+  // SUPRESIÓN — actualizar título del segundo reminder con plazo
+  const supLabels = {
+    co: 'Reminder — segundo aviso — 15 días',
+    mx: 'Reminder — segundo aviso — 10 días',
+    pe: 'Reminder — segundo aviso — 7 días',
+  };
+  const cs = country['sup'];
+  const seniorSub2 = document.getElementById('senior-ssub-sup-2');
+  if (seniorSub2) seniorSub2.textContent = supLabels[cs] || supLabels['co'];
+
+  // Habilitar/deshabilitar botón según si hay datos
+  const r2text = document.getElementById('rtext-sup-2');
+  const r2disabled = !r2text || r2text.textContent.includes('[FECHA');
+  const scopy = document.getElementById('senior-scopy-sup-2');
+  if (scopy) scopy.disabled = r2disabled;
 }
 
 function renderSimpleRemarks() {
@@ -609,13 +759,7 @@ function setCountry(tab, c, btn) {
   updateAll();
 }
 
-function setSupRoute(r) {
-  supRoute = r;
-  document.getElementById('co-sup-yes').className = 'cond-opt' + (r === 'yes' ? ' sel-yes' : '');
-  document.getElementById('co-sup-no').className = 'cond-opt' + (r === 'no' ? ' sel-no' : '');
-  document.getElementById('rcard-sup-2').classList.toggle('hidden', r !== 'no');
-
-}
+// setSupRoute eliminado — reminders siempre visibles
 
 function toggleProto(id) {
   document.getElementById(id).classList.toggle('open');
@@ -749,6 +893,26 @@ Ticket[ ${ticket} ]`;
   if (postEl) postEl.textContent = post;
 }
 
+function updateSupRemarks() {
+  const ticket = document.getElementById('t-sup').value.trim() || 'XXXXX';
+  const pre = `"Reclamación en trámite"
+Código 2001 Contra el responsable - respecto a la limitación temporal al tratamiento
+Suprimir la información una vez se cumpla la finalidad de la recolección
+Cliente solicita la eliminación de sus datos personales
+Ticket #${ticket}`;
+  const flag = `Supresión de datos | Ticket #${ticket}`;
+  const post = `"Reclamación resuelta"
+Código 2001 Contra el responsable - respecto a la limitación temporal al tratamiento
+Suprimir la información una vez se cumpla la finalidad de la recolección
+Ticket #${ticket}`;
+  const preEl  = document.getElementById('sup-remark-pre');
+  const flagEl = document.getElementById('sup-remark-flag');
+  const postEl = document.getElementById('sup-remark-post');
+  if (preEl)  preEl.textContent  = pre;
+  if (flagEl) flagEl.textContent = flag;
+  if (postEl) postEl.textContent = post;
+}
+
 function copyRemark(elId, btn) {
   const el = document.getElementById(elId);
   if (!el) return;
@@ -784,11 +948,10 @@ function resetAll() {
   document.getElementById('d-sup').value = todayStr;
 
   document.getElementById('warn-crit').classList.add('hidden');
-  document.getElementById('rcard-sup-2').classList.add('hidden');
+
 
   supRoute = null;
-  document.getElementById('co-sup-yes').className = 'cond-opt';
-  document.getElementById('co-sup-no').className = 'cond-opt';
+
   document.getElementById('btn-act').className = 'type-btn';
   document.getElementById('btn-sup').className = 'type-btn';
   document.getElementById('main-act').className = 'main';
@@ -804,6 +967,8 @@ document.getElementById('d-sup').value = todayStr;
 
 Object.entries(PROTO).forEach(([id, items]) => renderProto(id, items));
 updateAll();
+updateSupRemarks();
+renderSeniorView();
 </script>
 </body>
 </html>
