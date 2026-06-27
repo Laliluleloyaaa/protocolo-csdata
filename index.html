@@ -807,7 +807,24 @@ function easterFriday(y) {
 function peHols(y) {
   const ef=easterFriday(y),th=new Date(ef); th.setDate(ef.getDate()-1);
   const fmt=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  return new Set([`${y}-01-01`,`${y}-05-01`,`${y}-06-29`,`${y}-07-28`,`${y}-07-29`,`${y}-08-30`,`${y}-10-08`,`${y}-11-01`,`${y}-12-08`,`${y}-12-25`,fmt(th),fmt(ef)]);
+  // Feriados fijos nacionales Peru (incluye los incorporados desde 2022)
+  const fixed = [
+    `${y}-01-01`, // Año Nuevo
+    `${y}-05-01`, // Día del Trabajo
+    `${y}-06-07`, // Batalla de Arica y Día de la Bandera
+    `${y}-06-29`, // San Pedro y San Pablo
+    `${y}-07-23`, // Día de la Fuerza Aérea del Perú
+    `${y}-07-28`, // Fiestas Patrias
+    `${y}-07-29`, // Fiestas Patrias
+    `${y}-08-06`, // Batalla de Junín
+    `${y}-08-30`, // Santa Rosa de Lima
+    `${y}-10-08`, // Combate de Angamos
+    `${y}-11-01`, // Día de Todos los Santos
+    `${y}-12-08`, // Inmaculada Concepción
+    `${y}-12-09`, // Batalla de Ayacucho
+    `${y}-12-25`, // Navidad
+  ];
+  return new Set([...fixed, fmt(th), fmt(ef)]);
 }
 function toKey(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 function addCal(from,days) { const d=new Date(from); d.setDate(d.getDate()+days); return d; }
