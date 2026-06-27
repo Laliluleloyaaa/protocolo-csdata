@@ -658,6 +658,25 @@ function renderSimpleRemarks() {
 }
 
 function copySimple(elId, btn) {
+  const isActRemark = ['remark-pre','remark-popup','remark-post'].includes(elId);
+  const isSupRemark = ['sup-remark-pre','sup-remark-flag','sup-remark-post'].includes(elId);
+
+  if (isActRemark || isSupRemark) {
+    const ticket = isActRemark
+      ? document.getElementById('t-act').value.trim()
+      : document.getElementById('t-sup').value.trim();
+    if (!ticket) {
+      btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:14px"></i> Falta ticket';
+      setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:14px"></i> Copiar', 2000);
+      return;
+    }
+    if (isActRemark && document.querySelectorAll('#dato-checks-full input:checked, #dato-checks-simple input:checked').length === 0) {
+      btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:14px"></i> Marca el dato';
+      setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:14px"></i> Copiar', 2000);
+      return;
+    }
+  }
+
   const el = document.getElementById(elId);
   if (!el || btn.disabled) return;
   navigator.clipboard.writeText(el.textContent.trim()).then(() => {
@@ -942,6 +961,29 @@ Ticket #${ticket}`;
 }
 
 function copyRemark(elId, btn) {
+  // Verificar ticket según tipo de remark
+  const isAct = ['remark-pre','remark-popup','remark-post'].includes(elId);
+  const isSup = ['sup-remark-pre','sup-remark-flag','sup-remark-post'].includes(elId);
+  const ticket = isAct
+    ? document.getElementById('t-act').value.trim()
+    : document.getElementById('t-sup').value.trim();
+
+  if (!ticket) {
+    btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:12px"></i> Falta ticket';
+    setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:12px"></i> Copiar', 2000);
+    return;
+  }
+
+  // Para remarks de actualización, verificar que haya dato seleccionado
+  if (isAct) {
+    const dato = getDato();
+    if (dato === 'Correo electrónico' && document.querySelectorAll('#dato-checks-full input:checked, #dato-checks-simple input:checked').length === 0) {
+      btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:12px"></i> Marca el dato';
+      setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:12px"></i> Copiar', 2000);
+      return;
+    }
+  }
+
   const el = document.getElementById(elId);
   if (!el) return;
   navigator.clipboard.writeText(el.textContent.trim()).then(() => {
