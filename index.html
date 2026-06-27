@@ -173,6 +173,7 @@
   body.senior-view .view-full-content{display:none;}
   body.senior-view .view-simple-content{display:none;}
   body.senior-view .view-senior-content{display:block;}
+  /* Cuando rol=senior en cualquier vista, ocultar contenido general */
 </style>
 </head>
 <body>
@@ -189,7 +190,8 @@
       <button class="lang-btn" id="view-simple" onclick="setView('simple')"><i class="ti ti-bolt"></i> Simplificada</button>
     </div>
     <div class="lang-toggle">
-      <button class="lang-btn active" id="view-senior" onclick="setView('senior')"><i class="ti ti-user-star"></i> Seniors</button>
+      <button class="lang-btn active" id="view-csdata" onclick="setRole('csdata')"><i class="ti ti-users"></i> @csdata</button>
+      <button class="lang-btn" id="view-senior" onclick="setRole('senior')"><i class="ti ti-user-star"></i> Seniors</button>
     </div>
     <button class="reset-btn" onclick="resetAll()"><i class="ti ti-refresh"></i> Nuevo caso</button>
   </div>
@@ -477,15 +479,26 @@ let country = { act: 'co', sup: 'co' };
 let supRoute = null;
 let slackLang = 'es';
 let currentView = 'full';
+let currentRole = 'csdata';
+
+function setRole(role) {
+  currentRole = role;
+  document.getElementById('view-csdata').className = 'lang-btn' + (role === 'csdata' ? ' active' : '');
+  document.getElementById('view-senior').className = 'lang-btn' + (role === 'senior' ? ' active' : '');
+  document.body.classList.remove('simple-view','senior-view');
+  if (role === 'senior') {
+    document.body.classList.add('senior-view');
+  }
+  renderSeniorView();
+  renderSimpleView();
+}
 
 function setView(v) {
   currentView = v;
   document.getElementById('view-full').className = 'lang-btn' + (v === 'full' ? ' active' : '');
   document.getElementById('view-simple').className = 'lang-btn' + (v === 'simple' ? ' active' : '');
-  document.getElementById('view-senior').className = 'lang-btn' + (v === 'senior' ? ' active' : '');
   document.body.classList.remove('simple-view','senior-view');
   if (v === 'simple') document.body.classList.add('simple-view');
-  if (v === 'senior') document.body.classList.add('senior-view');
   renderSimpleView();
   renderSeniorView();
 }
