@@ -21,10 +21,19 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:16px;line-height:1.7;min-height:100vh;}
-  header{background:var(--bg2);border-bottom:1px solid var(--bd);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-  .logo{font-family:var(--mono);font-size:15px;color:var(--accent);letter-spacing:.05em;}
+  header{background:var(--bg2);border-bottom:1px solid var(--bd2);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:16px;}
+  .logo{font-family:var(--mono);font-size:14px;color:var(--accent);letter-spacing:.04em;}
   .logo span{color:var(--t2);}
-  .reset-btn{background:transparent;border:1px solid var(--bd);border-radius:6px;color:var(--t2);cursor:pointer;font-size:13px;padding:6px 12px;display:flex;align-items:center;gap:5px;transition:all .2s;}
+  .header-controls{display:flex;align-items:center;gap:16px;}
+  .ctrl-group{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .ctrl-label{font-size:10px;color:var(--t3);letter-spacing:.07em;text-transform:uppercase;font-family:var(--mono);}
+  .toggle-group{display:flex;background:var(--bg);border:1px solid var(--bd2);border-radius:7px;padding:2px;gap:2px;}
+  .tbtn{background:transparent;border:none;border-radius:5px;color:var(--t2);cursor:pointer;font-size:12px;padding:5px 11px;display:flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap;}
+  .tbtn i{font-size:13px;}
+  .tbtn:hover{color:var(--t1);background:var(--bg3);}
+  .tbtn.active{background:var(--bg3);color:var(--t1);border:1px solid var(--bd);}
+  .ctrl-sep{width:1px;height:36px;background:var(--bd2);}
+  .reset-btn{background:transparent;border:1px solid var(--bd);border-radius:6px;color:var(--t2);cursor:pointer;font-size:12px;padding:6px 12px;display:flex;align-items:center;gap:5px;transition:all .2s;}
   .reset-btn:hover{border-color:var(--danger);color:var(--danger);}
   .container{max-width:860px;margin:0 auto;padding:28px 20px 80px;}
 
@@ -122,10 +131,7 @@
   .divider{border:none;border-top:1px solid var(--bd);margin:4px 16px;}
   .sublabel{padding:8px 16px 3px;font-family:var(--mono);font-size:12px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;}
   .hidden{display:none!important;}
-  .lang-toggle{display:flex;background:var(--bg3);border:1px solid var(--bd);border-radius:6px;padding:3px;gap:3px;}
-  .lang-btn{background:transparent;border:none;border-radius:4px;color:var(--t2);cursor:pointer;font-size:13px;font-family:var(--mono);padding:4px 10px;transition:all .15s;display:flex;align-items:center;gap:4px;}
-  .lang-btn.active{background:var(--bg2);color:var(--t1);border:1px solid var(--bd);}
-  .lang-btn:hover:not(.active){color:var(--t1);}
+
   .reminders-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
   .rem-num{font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
   .remarks-block{background:var(--bg2);border:1px solid var(--bd2);border-radius:10px;margin-bottom:12px;overflow:hidden;}
@@ -180,20 +186,39 @@
 <body>
 
 <header>
-  <div class="logo">@csdata <span>/ Processing Data — Protocolo</span></div>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="lang-es" onclick="setLang('es')"><i class="ti ti-language"></i> Español</button>
-      <button class="lang-btn" id="lang-en" onclick="setLang('en')">English</button>
+  <div class="logo">@csdata <span>/ Processing Data</span></div>
+  <div class="header-controls">
+
+    <div class="ctrl-group">
+      <span class="ctrl-label">Slack</span>
+      <div class="toggle-group">
+        <button class="tbtn active" id="lang-es" onclick="setLang('es')"><i class="ti ti-language"></i> Español</button>
+        <button class="tbtn" id="lang-en" onclick="setLang('en')">English</button>
+      </div>
     </div>
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="view-full" onclick="setView('full')"><i class="ti ti-layout-list"></i> Ampliada</button>
-      <button class="lang-btn" id="view-simple" onclick="setView('simple')"><i class="ti ti-bolt"></i> Simplificada</button>
+
+    <div class="ctrl-sep"></div>
+
+    <div class="ctrl-group">
+      <span class="ctrl-label">Rol</span>
+      <div class="toggle-group">
+        <button class="tbtn active" id="view-csdata" onclick="setRole('csdata')"><i class="ti ti-users"></i> @csdata</button>
+        <button class="tbtn" id="view-senior" onclick="setRole('senior')"><i class="ti ti-user-star"></i> Seniors</button>
+      </div>
     </div>
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="view-csdata" onclick="setRole('csdata')"><i class="ti ti-users"></i> @csdata</button>
-      <button class="lang-btn" id="view-senior" onclick="setRole('senior')"><i class="ti ti-user-star"></i> Seniors</button>
+
+    <div class="ctrl-sep"></div>
+
+    <div class="ctrl-group">
+      <span class="ctrl-label">Vista</span>
+      <div class="toggle-group">
+        <button class="tbtn active" id="view-full" onclick="setView('full')"><i class="ti ti-layout-list"></i> Ampliada</button>
+        <button class="tbtn" id="view-simple" onclick="setView('simple')"><i class="ti ti-bolt"></i> Simplificada</button>
+      </div>
     </div>
+
+    <div class="ctrl-sep"></div>
+
     <button class="reset-btn" onclick="resetAll()"><i class="ti ti-refresh"></i> Nuevo caso</button>
   </div>
 </header>
@@ -445,8 +470,8 @@ let currentRole = 'csdata';
 
 function setRole(role) {
   currentRole = role;
-  document.getElementById('view-csdata').className = 'lang-btn' + (role === 'csdata' ? ' active' : '');
-  document.getElementById('view-senior').className = 'lang-btn' + (role === 'senior' ? ' active' : '');
+  document.getElementById('view-csdata').className = 'tbtn' + (role === 'csdata' ? ' active' : '');
+  document.getElementById('view-senior').className = 'tbtn' + (role === 'senior' ? ' active' : '');
   document.body.classList.toggle('senior-role', role === 'senior');
   renderSeniorView();
   renderSimpleView();
@@ -454,8 +479,8 @@ function setRole(role) {
 
 function setView(v) {
   currentView = v;
-  document.getElementById('view-full').className = 'lang-btn' + (v === 'full' ? ' active' : '');
-  document.getElementById('view-simple').className = 'lang-btn' + (v === 'simple' ? ' active' : '');
+  document.getElementById('view-full').className = 'tbtn' + (v === 'full' ? ' active' : '');
+  document.getElementById('view-simple').className = 'tbtn' + (v === 'simple' ? ' active' : '');
   document.body.classList.remove('simple-view','senior-view');
   if (v === 'simple') document.body.classList.add('simple-view');
   renderSimpleView();
@@ -616,8 +641,8 @@ function copySimple(elId, btn) {
 
 function setLang(lang) {
   slackLang = lang;
-  document.getElementById('lang-es').className = 'lang-btn' + (lang === 'es' ? ' active' : '');
-  document.getElementById('lang-en').className = 'lang-btn' + (lang === 'en' ? ' active' : '');
+  document.getElementById('lang-es').className = 'tbtn' + (lang === 'es' ? ' active' : '');
+  document.getElementById('lang-en').className = 'tbtn' + (lang === 'en' ? ' active' : '');
   updateAll();
 }
 
