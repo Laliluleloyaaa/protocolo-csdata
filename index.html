@@ -72,9 +72,6 @@
   .copy-btn:hover{background:#6ba3f9;transform:translateY(-1px);box-shadow:0 4px 12px rgba(79,142,247,.3);}
   .copy-btn:active{transform:translateY(0);}
   .copy-btn:disabled{opacity:.25;cursor:not-allowed;transform:none;box-shadow:none;}
-  .sent-btn{display:flex;align-items:center;gap:5px;font-size:14px;padding:9px 18px;background:transparent;border:1px solid var(--bd2);border-radius:8px;color:var(--t2);cursor:pointer;transition:all .2s;}
-  .sent-btn:hover{border-color:var(--s-bd);color:var(--s-t);background:var(--s-bg);}
-  .sent-btn.done{border-color:var(--s-bd);color:var(--s-t);background:var(--s-bg);cursor:default;}
 
   .cond-block{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;margin-bottom:12px;}
   .cond-q{font-size:15px;font-weight:500;margin-bottom:10px;}
@@ -251,7 +248,6 @@
           <div class="rem-date-note" id="rnote-act-1"></div>
           <div class="rem-actions">
             <button class="copy-btn" id="rcopy-act-1" onclick="copyR('rtext-act-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-            <button class="sent-btn" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
           </div>
         </div>
       </div>
@@ -269,7 +265,6 @@
           <div class="rem-date-note" id="rnote-act-2"></div>
           <div class="rem-actions">
             <button class="copy-btn" id="rcopy-act-2" onclick="copyR('rtext-act-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-            <button class="sent-btn" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
           </div>
         </div>
       </div>
@@ -357,7 +352,6 @@
           <div class="rem-date-note" id="rnote-sup-1"></div>
           <div class="rem-actions">
             <button class="copy-btn" id="rcopy-sup-1" onclick="copyR('rtext-sup-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-            <button class="sent-btn" id="rsent-sup-1" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
           </div>
         </div>
       </div>
@@ -374,7 +368,6 @@
           <div class="rem-date-note" id="rnote-sup-2"></div>
           <div class="rem-actions">
             <button class="copy-btn" id="rcopy-sup-2" onclick="copyR('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-            <button class="sent-btn" id="rsent-sup-2" onclick="markSent(this)"><i class="ti ti-check" style="font-size:13px"></i> Reminder enviado</button>
           </div>
         </div>
       </div>
@@ -619,7 +612,7 @@ function copySimple(elId, btn) {
     btn.innerHTML = '<i class="ti ti-check" style="font-size:14px"></i> ¡Copiado!';
     setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:14px"></i> Copiar', 2000);
   });
-} // 'es' = @canal, 'en' = @channel
+}
 
 function setLang(lang) {
   slackLang = lang;
@@ -914,17 +907,11 @@ function copyR(elId, btn) {
   });
 }
 
-function markSent(btn) {
-  btn.className = 'sent-btn done';
-  btn.innerHTML = '<i class="ti ti-circle-check" style="font-size:13px"></i> Reminder enviado';
-  btn.disabled = true;
-}
-
 function resetAll() {
   if (!confirm('¿Iniciar un nuevo caso? Se borrará el progreso actual.')) return;
   document.querySelectorAll('.check-item').forEach(el => { el.classList.remove('done'); });
   document.querySelectorAll('.cval-item').forEach(el => { el.classList.remove('pass','fail'); el.querySelectorAll('.cv-y,.cv-n').forEach(b=>b.classList.remove('active')); });
-  document.querySelectorAll('.sent-btn').forEach(b => { b.className='sent-btn'; b.innerHTML='<i class="ti ti-check" style="font-size:13px"></i> Reminder enviado'; b.disabled=false; });
+  document.querySelectorAll('#dato-checks-full input, #dato-checks-simple input').forEach(c => c.checked = false);
   document.getElementById('t-act').value = '';
   document.getElementById('t-sup').value = '';
   document.getElementById('d-act').value = todayStr;
