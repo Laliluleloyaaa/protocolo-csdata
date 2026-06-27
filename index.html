@@ -906,16 +906,16 @@ function updateAll() {
 function updateRemarks() {
   const ticket = document.getElementById('t-act').value.trim() || 'XXXXX';
   const dato = getDato();
-  const pre = `"Reclamación en trámite"
-Actualización de datos: ${dato}
-"Código 601 - CONTRA EL RESPONSABLE - RESPECTO DE LA ACTUALIZACIÓN DE LA INFORMACIÓN - Actualizar oportunamente la información en las bases de datos"
-Cliente solicita la actualización de sus datos personales.
-Ticket[ ${ticket} ]`;
+  const pre = `-"Reclamación en trámite"
+-Actualización de datos: ${dato}
+-"Código 601 - CONTRA EL RESPONSABLE - RESPECTO DE LA ACTUALIZACIÓN DE LA INFORMACIÓN - Actualizar oportunamente la información en las bases de datos"
+-Cliente solicita la actualización de sus datos personales.
+-Ticket[ ${ticket} ]`;
   const popup = `Actualización de datos | Ticket#${ticket}`;
-  const post = `"Reclamación resuelta"
-Actualización de datos: ${dato}
-"Código 601 - CONTRA EL RESPONSABLE - RESPECTO DE LA ACTUALIZACIÓN DE LA INFORMACIÓN - Actualizar oportunamente la información en las bases de datos"
-Ticket[ ${ticket} ]`;
+  const post = `-"Reclamación resuelta"
+-Actualización de datos: ${dato}
+-"Código 601 - CONTRA EL RESPONSABLE - RESPECTO DE LA ACTUALIZACIÓN DE LA INFORMACIÓN - Actualizar oportunamente la información en las bases de datos"
+-Ticket[ ${ticket} ]`;
   const preEl = document.getElementById('remark-pre');
   const popEl = document.getElementById('remark-popup');
   const postEl = document.getElementById('remark-post');
@@ -927,16 +927,16 @@ Ticket[ ${ticket} ]`;
 
 function updateSupRemarks() {
   const ticket = document.getElementById('t-sup').value.trim() || 'XXXXX';
-  const pre = `"Reclamación en trámite"
-Código 2001 Contra el responsable - respecto a la limitación temporal al tratamiento
+  const pre = `-"Reclamación en trámite"
+-Código 2001 Contra el responsable - respecto a la limitación temporal al tratamiento
 Suprimir la información una vez se cumpla la finalidad de la recolección
-Cliente solicita la eliminación de sus datos personales
-Ticket #${ticket}`;
+-Cliente solicita la eliminación de sus datos personales.
+-Ticket#${ticket}`;
   const flag = `Supresión de datos | Ticket #${ticket}`;
-  const post = `"Reclamación resuelta"
-Código 2001 Contra el responsable - respecto a la limitación temporal al tratamiento
+  const post = `-"Reclamación resuelta"
+-Código 2001 Contra el responsable - respecto a la limitación temporal al tratamiento
 Suprimir la información una vez se cumpla la finalidad de la recolección
-Ticket #${ticket}`;
+-Ticket#${ticket}`;
   const preEl  = document.getElementById('sup-remark-pre');
   const flagEl = document.getElementById('sup-remark-flag');
   const postEl = document.getElementById('sup-remark-post');
