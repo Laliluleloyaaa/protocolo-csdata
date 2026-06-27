@@ -143,7 +143,7 @@
   .remarks-body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
   .remark-item{background:var(--bg);border:1px solid var(--bd2);border-radius:8px;overflow:hidden;}
   .remark-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 4px;gap:8px;}
-  .remark-label{font-size:12px;color:var(--t3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;}
+  .remark-label{font-size:13px;color:var(--t1);font-family:var(--sans);font-weight:500;}
   .copy-btn-sm{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 12px;background:var(--i-t);border:1px solid var(--i-bd);border-radius:7px;color:#0f1117;cursor:pointer;transition:all .2s;font-weight:600;white-space:nowrap;}
   .copy-btn-sm:hover{background:#6ba3f9;transform:translateY(-1px);box-shadow:0 3px 8px rgba(79,142,247,.25);}
   .copy-btn-sm:active{transform:translateY(0);}
@@ -187,10 +187,9 @@
   body.simple-view .view-simple-content{display:block;}
   /* Vista senior: muestra todo incluyendo exclusivos */
   /* Vista csdata: oculta exclusivos de senior */
-  body.senior-role .senior-only { display: block; }
-  body.senior-role .simple-card.senior-only { display: flex; }
-  body.senior-role div.senior-only { display: block !important; }
   .senior-only { display: none !important; }
+  body.senior-role .senior-only { display: block !important; }
+  body.senior-role .simple-card.senior-only { display: flex !important; }
   /* view-senior-content nunca se usa como toggle de display, se controla por senior-only */
   .view-senior-content { display: contents; }
 </style>
@@ -449,9 +448,7 @@
       </div>
       <div class="simple-card senior-only" id="simple-sup-r2">
         <div><div class="simple-card-title" id="ssub-sup-2">Reminder — segundo aviso</div><div class="simple-card-sub" id="date-ssub-sup-2"></div></div>
-        <button class="simple-btn" id="scopy-sup-2" onclick="copySimple('rtext-sup-2',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
+        <button class="simple-btn" id="scopy-sup-2" onclick="copySimple('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:14px"></i> Copiar</button>
       </div>
       <div class="senior-only" style="display:none">
         <div class="simple-section-title with-sep" style="margin-top:0">Remarks en BO</div>
