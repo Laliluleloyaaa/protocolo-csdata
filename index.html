@@ -78,8 +78,8 @@
   .rem-missing{font-size:13px;color:var(--w-t);display:flex;align-items:center;gap:5px;margin-bottom:8px;font-family:var(--mono);}
   .rem-text{font-family:var(--mono);font-size:13px;color:var(--i-t);white-space:pre-wrap;word-break:break-all;line-height:1.7;margin-bottom:4px;}
   .rem-date-note{font-size:13px;color:var(--t2);font-family:var(--mono);margin-bottom:10px;}
-  .rem-actions{display:flex;gap:8px;flex-wrap:wrap;}
-  .copy-btn{display:flex;align-items:center;gap:6px;font-size:14px;padding:9px 18px;background:var(--i-t);border:1px solid var(--i-bd);border-radius:8px;color:#0f1117;cursor:pointer;transition:all .2s;font-weight:600;}
+
+  .copy-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:7px 14px;background:var(--i-t);border:1px solid var(--i-bd);border-radius:8px;color:#0f1117;cursor:pointer;transition:all .2s;font-weight:600;white-space:nowrap;}
   .copy-btn:hover{background:#6ba3f9;transform:translateY(-1px);box-shadow:0 4px 12px rgba(79,142,247,.3);}
   .copy-btn:active{transform:translateY(0);}
   .copy-btn:disabled{opacity:.25;cursor:not-allowed;transform:none;box-shadow:none;}
@@ -142,7 +142,11 @@
   .remarks-title{flex:1;font-size:15px;font-weight:500;}
   .remarks-body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
   .remark-item{background:var(--bg);border:1px solid var(--bd2);border-radius:8px;overflow:hidden;}
-  .remark-label{font-size:12px;color:var(--t3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:8px 12px 4px;}
+  .remark-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 4px;gap:8px;}
+  .remark-label{font-size:12px;color:var(--t3);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;}
+  .copy-btn-sm{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 12px;background:var(--i-t);border:1px solid var(--i-bd);border-radius:7px;color:#0f1117;cursor:pointer;transition:all .2s;font-weight:600;white-space:nowrap;}
+  .copy-btn-sm:hover{background:#6ba3f9;transform:translateY(-1px);box-shadow:0 3px 8px rgba(79,142,247,.25);}
+  .copy-btn-sm:active{transform:translateY(0);}
   .remark-dato-row{display:flex;align-items:center;gap:8px;padding:4px 12px 8px;}
   .remark-dato-row label{font-size:11px;color:var(--t2);white-space:nowrap;}
   .dato-select{background:var(--bg2);border:1px solid var(--bd);border-radius:4px;color:var(--t1);font-family:var(--mono);font-size:13px;padding:3px 8px;outline:none;cursor:pointer;}
@@ -274,14 +278,12 @@
           <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
           <span class="rem-card-title" id="rtitle-act-1">Reminder</span>
           <span class="rem-tag conditional" id="rtag-act-1"></span>
+          <button class="copy-btn" id="rcopy-act-1" onclick="copyR('rtext-act-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
         </div>
         <div class="rem-body">
           <div class="rem-missing hidden" id="miss-act-1"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
           <div class="rem-text" id="rtext-act-1"></div>
           <div class="rem-date-note" id="rnote-act-1"></div>
-          <div class="rem-actions">
-            <button class="copy-btn" id="rcopy-act-1" onclick="copyR('rtext-act-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-          </div>
         </div>
       </div>
 
@@ -291,14 +293,12 @@
           <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
           <span class="rem-card-title">Reminder — cierre de ticket</span>
           <span class="rem-tag conditional"><i class="ti ti-lock" style="font-size:11px"></i> Solo CO</span>
+          <button class="copy-btn" id="rcopy-act-2" onclick="copyR('rtext-act-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
         </div>
         <div class="rem-body">
           <div class="rem-missing hidden" id="miss-act-2"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
           <div class="rem-text" id="rtext-act-2"></div>
           <div class="rem-date-note" id="rnote-act-2"></div>
-          <div class="rem-actions">
-            <button class="copy-btn" id="rcopy-act-2" onclick="copyR('rtext-act-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-          </div>
         </div>
       </div>
 
@@ -321,19 +321,25 @@
           </div>
         </div>
         <div class="remark-item">
-          <div class="remark-label">Remark previo — antes de actualizar</div>
+          <div class="remark-header">
+            <span class="remark-label">Remark previo — antes de actualizar</span>
+            <button class="copy-btn-sm" onclick="copyRemark('remark-pre',this)"><i class="ti ti-copy" style="font-size:12px"></i> Copiar</button>
+          </div>
           <div class="remark-text" id="remark-pre"></div>
-          <button class="remark-copy" onclick="copyRemark('remark-pre',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
         </div>
         <div class="remark-item">
-          <div class="remark-label">Nota ventana emergente (pop-up)</div>
+          <div class="remark-header">
+            <span class="remark-label">Nota ventana emergente (pop-up)</span>
+            <button class="copy-btn-sm" onclick="copyRemark('remark-popup',this)"><i class="ti ti-copy" style="font-size:12px"></i> Copiar</button>
+          </div>
           <div class="remark-text" id="remark-popup"></div>
-          <button class="remark-copy" onclick="copyRemark('remark-popup',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
         </div>
         <div class="remark-item">
-          <div class="remark-label">Remark posterior — después de actualizar</div>
+          <div class="remark-header">
+            <span class="remark-label">Remark posterior — después de actualizar</span>
+            <button class="copy-btn-sm" onclick="copyRemark('remark-post',this)"><i class="ti ti-copy" style="font-size:12px"></i> Copiar</button>
+          </div>
           <div class="remark-text" id="remark-post"></div>
-          <button class="remark-copy" onclick="copyRemark('remark-post',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
         </div>
       </div>
     </div>
@@ -378,14 +384,12 @@
           <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
           <span class="rem-card-title">Reminder — primer aviso</span>
           <span class="rem-tag always"><i class="ti ti-check" style="font-size:11px"></i> Siempre al enviar la macro</span>
+          <button class="copy-btn" id="rcopy-sup-1" onclick="copyR('rtext-sup-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
         </div>
         <div class="rem-body">
           <div class="rem-missing hidden" id="miss-sup-1"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
           <div class="rem-text" id="rtext-sup-1"></div>
           <div class="rem-date-note" id="rnote-sup-1"></div>
-          <div class="rem-actions">
-            <button class="copy-btn" id="rcopy-sup-1" onclick="copyR('rtext-sup-1',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-          </div>
         </div>
       </div>
 
@@ -394,14 +398,12 @@
           <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
           <span class="rem-card-title">Reminder — segundo aviso</span>
           <span class="rem-tag conditional"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Sin respuesta del usuario</span>
+          <button class="copy-btn" id="rcopy-sup-2" onclick="copyR('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
         </div>
         <div class="rem-body">
           <div class="rem-missing hidden" id="miss-sup-2"><i class="ti ti-alert-circle" style="font-size:13px"></i> Completa el ticket y la fecha para generar el comando</div>
           <div class="rem-text" id="rtext-sup-2"></div>
           <div class="rem-date-note" id="rnote-sup-2"></div>
-          <div class="rem-actions">
-            <button class="copy-btn" id="rcopy-sup-2" onclick="copyR('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
-          </div>
         </div>
       </div>
       <!-- REMARKS SUPRESIÓN -->
@@ -412,19 +414,25 @@
         </div>
         <div class="remarks-body">
           <div class="remark-item">
-            <div class="remark-label">Remark previo — antes de gestionar</div>
+            <div class="remark-header">
+              <span class="remark-label">Remark previo — antes de gestionar</span>
+              <button class="copy-btn-sm" onclick="copyRemark('sup-remark-pre',this)"><i class="ti ti-copy" style="font-size:12px"></i> Copiar</button>
+            </div>
             <div class="remark-text" id="sup-remark-pre"></div>
-            <button class="remark-copy" onclick="copyRemark('sup-remark-pre',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
           </div>
           <div class="remark-item">
-            <div class="remark-label">Nota al activar flag Locked</div>
+            <div class="remark-header">
+              <span class="remark-label">Nota al activar flag Locked</span>
+              <button class="copy-btn-sm" onclick="copyRemark('sup-remark-flag',this)"><i class="ti ti-copy" style="font-size:12px"></i> Copiar</button>
+            </div>
             <div class="remark-text" id="sup-remark-flag"></div>
-            <button class="remark-copy" onclick="copyRemark('sup-remark-flag',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
           </div>
           <div class="remark-item">
-            <div class="remark-label">Remark posterior — después de gestionar</div>
+            <div class="remark-header">
+              <span class="remark-label">Remark posterior — después de gestionar</span>
+              <button class="copy-btn-sm" onclick="copyRemark('sup-remark-post',this)"><i class="ti ti-copy" style="font-size:12px"></i> Copiar</button>
+            </div>
             <div class="remark-text" id="sup-remark-post"></div>
-            <button class="remark-copy" onclick="copyRemark('sup-remark-post',this)"><i class="ti ti-copy" style="font-size:11px"></i> Copiar</button>
           </div>
         </div>
       </div>
@@ -940,8 +948,8 @@ function copyRemark(elId, btn) {
   const el = document.getElementById(elId);
   if (!el) return;
   navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-    btn.innerHTML = '<i class="ti ti-check" style="font-size:11px"></i> Copiado';
-    setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:11px"></i> Copiar', 2000);
+    btn.innerHTML = '<i class="ti ti-check" style="font-size:12px"></i> Copiado';
+    setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:12px"></i> Copiar', 2000);
   });
 }
 
