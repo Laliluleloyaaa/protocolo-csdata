@@ -170,10 +170,14 @@
   .view-senior-content{display:none;}
   body.simple-view .view-full-content{display:none;}
   body.simple-view .view-simple-content{display:block;}
-  body.senior-view .view-full-content{display:none;}
-  body.senior-view .view-simple-content{display:none;}
-  body.senior-view .view-senior-content{display:block;}
-  /* Cuando rol=senior en cualquier vista, ocultar contenido general */
+  /* Vista senior: muestra todo incluyendo exclusivos */
+  /* Vista csdata: oculta exclusivos de senior */
+  .senior-only { display: none; }
+  body.senior-role .senior-only { display: block; }
+  body.senior-role .simple-card.senior-only { display: flex; }
+  body.senior-role div.senior-only { display: block; }
+  /* view-senior-content nunca se usa como toggle de display, se controla por senior-only */
+  .view-senior-content { display: contents; }
 </style>
 </head>
 <body>
@@ -253,7 +257,7 @@
       </div>
 
       <!-- Reminder 2 (solo CO y PE: cierre) -->
-      <div class="reminder-card hidden" id="rcard-act-2">
+      <div class="reminder-card hidden senior-only" id="rcard-act-2">
         <div class="rem-card-header">
           <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
           <span class="rem-card-title">Reminder — cierre de ticket</span>
@@ -308,11 +312,6 @@
 
     </div><!-- /view-full-content -->
 
-    <!-- VISTA SENIORS ACT -->
-    <div class="view-senior-content" id="senior-act">
-      <div id="senior-act-content"></div>
-    </div>
-
     <!-- VISTA SIMPLIFICADA -->
     <div class="view-simple-content" id="simple-act">
       <div class="simple-section-title">Reminders</div>
@@ -363,7 +362,7 @@
         </div>
       </div>
 
-      <div class="reminder-card" id="rcard-sup-2">
+      <div class="reminder-card senior-only" id="rcard-sup-2">
         <div class="rem-card-header">
           <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
           <span class="rem-card-title">Reminder — segundo aviso</span>
@@ -380,7 +379,7 @@
         </div>
       </div>
       <!-- REMARKS SUPRESIÓN -->
-      <div class="remarks-block" style="margin-top:4px;">
+      <div class="remarks-block senior-only" style="margin-top:4px;">
         <div class="remarks-header">
           <i class="ti ti-notes" style="font-size:16px;color:var(--t2)"></i>
           <span class="remarks-title">Remarks en BO</span>
@@ -405,36 +404,6 @@
       </div>
     </div><!-- /view-full-content sup -->
 
-    <!-- VISTA SENIORS SUP -->
-    <div class="view-senior-content" id="senior-sup">
-      <div class="simple-section-title">Reminder — exclusivo Seniors</div>
-      <div class="simple-card">
-        <div><div class="simple-card-title" id="senior-ssub-sup-2">Reminder — segundo aviso</div></div>
-        <button class="simple-btn" id="senior-scopy-sup-2" onclick="copySimple('rtext-sup-2',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
-      </div>
-      <div class="simple-section-title" style="margin-top:20px">Remarks en BO — exclusivo Seniors</div>
-      <div class="simple-card">
-        <div><div class="simple-card-title">Remark previo</div></div>
-        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-pre',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
-      </div>
-      <div class="simple-card">
-        <div><div class="simple-card-title">Nota flag Locked</div></div>
-        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-flag',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
-      </div>
-      <div class="simple-card">
-        <div><div class="simple-card-title">Remark posterior</div></div>
-        <button class="simple-btn remark-s" onclick="copySimple('sup-remark-post',this)">
-          <i class="ti ti-copy" style="font-size:14px"></i> Copiar
-        </button>
-      </div>
-    </div>
-
     <!-- VISTA SIMPLIFICADA SUP -->
     <div class="view-simple-content" id="simple-sup">
       <div class="simple-section-title">Reminders</div>
@@ -444,7 +413,7 @@
           <i class="ti ti-copy" style="font-size:14px"></i> Copiar
         </button>
       </div>
-      <div class="simple-card" id="simple-sup-r2">
+      <div class="simple-card senior-only" id="simple-sup-r2">
         <div><div class="simple-card-title" id="ssub-sup-2">Reminder — segundo aviso</div></div>
         <button class="simple-btn" id="scopy-sup-2" onclick="copySimple('rtext-sup-2',this)">
           <i class="ti ti-copy" style="font-size:14px"></i> Copiar
@@ -485,10 +454,7 @@ function setRole(role) {
   currentRole = role;
   document.getElementById('view-csdata').className = 'lang-btn' + (role === 'csdata' ? ' active' : '');
   document.getElementById('view-senior').className = 'lang-btn' + (role === 'senior' ? ' active' : '');
-  document.body.classList.remove('simple-view','senior-view');
-  if (role === 'senior') {
-    document.body.classList.add('senior-view');
-  }
+  document.body.classList.toggle('senior-role', role === 'senior');
   renderSeniorView();
   renderSimpleView();
 }
@@ -544,7 +510,11 @@ function renderSimpleReminders() {
   const remIds = ['act-1', 'act-2'];
   el.innerHTML = remIds.map(id => {
     const card = document.getElementById('rcard-' + id);
-    if (!card || card.classList.contains('hidden')) return '';
+    // act-2 solo se muestra si es CO y rol senior
+    if (id === 'act-2') {
+      if (country['act'] !== 'co' || currentRole !== 'senior') return '';
+    }
+    if (!card || (card.classList.contains('hidden') && id !== 'act-2')) return '';
     const titleEl = document.getElementById('rtitle-' + id) || card.querySelector('.rem-card-title');
     const title = titleEl ? titleEl.textContent.trim() : id;
     const textEl = document.getElementById('rtext-' + id);
