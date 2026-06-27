@@ -147,6 +147,7 @@
   .copy-btn-sm{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 12px;background:var(--i-t);border:1px solid var(--i-bd);border-radius:7px;color:#0f1117;cursor:pointer;transition:all .2s;font-weight:600;white-space:nowrap;}
   .copy-btn-sm:hover{background:#6ba3f9;transform:translateY(-1px);box-shadow:0 3px 8px rgba(79,142,247,.25);}
   .copy-btn-sm:active{transform:translateY(0);}
+  .copy-btn-sm:disabled{opacity:.25;cursor:not-allowed;transform:none;box-shadow:none;}
   .remark-dato-row{display:flex;align-items:center;gap:8px;padding:4px 12px 8px;}
   .remark-dato-row label{font-size:11px;color:var(--t2);white-space:nowrap;}
   .dato-select{background:var(--bg2);border:1px solid var(--bd);border-radius:4px;color:var(--t1);font-family:var(--mono);font-size:13px;padding:3px 8px;outline:none;cursor:pointer;}
@@ -313,10 +314,10 @@
         <div style="padding:8px 16px 10px;">
           <div style="font-size:12px;color:var(--t2);font-family:var(--mono);margin-bottom:8px;">Dato(s) actualizado(s):</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;" id="dato-checks-full">
-            <label class="dato-check-label"><input type="checkbox" value="Correo electrónico" onchange="syncDatoFull();updateRemarks()"> Correo electrónico</label>
-            <label class="dato-check-label"><input type="checkbox" value="Número de teléfono" onchange="syncDatoFull();updateRemarks()"> Número de teléfono</label>
-            <label class="dato-check-label"><input type="checkbox" value="Dirección de residencia" onchange="syncDatoFull();updateRemarks()"> Dirección de residencia</label>
-            <label class="dato-check-label"><input type="checkbox" value="Fecha de nacimiento" onchange="syncDatoFull();updateRemarks()"> Fecha de nacimiento</label>
+            <label class="dato-check-label"><input type="checkbox" value="Correo electrónico" onchange="syncDatoFull();updateRemarks();updateRemarkBtns()"> Correo electrónico</label>
+            <label class="dato-check-label"><input type="checkbox" value="Número de teléfono" onchange="syncDatoFull();updateRemarks();updateRemarkBtns()"> Número de teléfono</label>
+            <label class="dato-check-label"><input type="checkbox" value="Dirección de residencia" onchange="syncDatoFull();updateRemarks();updateRemarkBtns()"> Dirección de residencia</label>
+            <label class="dato-check-label"><input type="checkbox" value="Fecha de nacimiento" onchange="syncDatoFull();updateRemarks();updateRemarkBtns()"> Fecha de nacimiento</label>
           </div>
         </div>
         <div class="remark-item">
@@ -353,10 +354,10 @@
       <div style="margin-bottom:12px;">
         <div style="font-size:12px;color:var(--t2);font-family:var(--mono);margin-bottom:8px;">Dato(s) actualizado(s):</div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;" id="dato-checks-simple">
-          <label class="dato-check-label"><input type="checkbox" value="Correo electrónico" onchange="syncDatoSimple()"> Correo electrónico</label>
-          <label class="dato-check-label"><input type="checkbox" value="Número de teléfono" onchange="syncDatoSimple()"> Número de teléfono</label>
-          <label class="dato-check-label"><input type="checkbox" value="Dirección de residencia" onchange="syncDatoSimple()"> Dirección de residencia</label>
-          <label class="dato-check-label"><input type="checkbox" value="Fecha de nacimiento" onchange="syncDatoSimple()"> Fecha de nacimiento</label>
+          <label class="dato-check-label"><input type="checkbox" value="Correo electrónico" onchange="syncDatoSimple();updateRemarkBtns()"> Correo electrónico</label>
+          <label class="dato-check-label"><input type="checkbox" value="Número de teléfono" onchange="syncDatoSimple();updateRemarkBtns()"> Número de teléfono</label>
+          <label class="dato-check-label"><input type="checkbox" value="Dirección de residencia" onchange="syncDatoSimple();updateRemarkBtns()"> Dirección de residencia</label>
+          <label class="dato-check-label"><input type="checkbox" value="Fecha de nacimiento" onchange="syncDatoSimple();updateRemarkBtns()"> Fecha de nacimiento</label>
         </div>
       </div>
       <div id="simple-rem-remarks"></div>
@@ -522,6 +523,7 @@ function syncDatoSimple() {
   updateSupRemarks();
   renderSimpleView();
   renderSeniorView();
+  updateRemarkBtns();
 }
 
 function syncDatoFull() {
@@ -658,27 +660,9 @@ function renderSimpleRemarks() {
 }
 
 function copySimple(elId, btn) {
-  const isActRemark = ['remark-pre','remark-popup','remark-post'].includes(elId);
-  const isSupRemark = ['sup-remark-pre','sup-remark-flag','sup-remark-post'].includes(elId);
-
-  if (isActRemark || isSupRemark) {
-    const ticket = isActRemark
-      ? document.getElementById('t-act').value.trim()
-      : document.getElementById('t-sup').value.trim();
-    if (!ticket) {
-      btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:14px"></i> Falta ticket';
-      setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:14px"></i> Copiar', 2000);
-      return;
-    }
-    if (isActRemark && document.querySelectorAll('#dato-checks-full input:checked, #dato-checks-simple input:checked').length === 0) {
-      btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:14px"></i> Marca el dato';
-      setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:14px"></i> Copiar', 2000);
-      return;
-    }
-  }
-
+  if (btn.disabled) return;
   const el = document.getElementById(elId);
-  if (!el || btn.disabled) return;
+  if (!el) return;
   navigator.clipboard.writeText(el.textContent.trim()).then(() => {
     btn.innerHTML = '<i class="ti ti-check" style="font-size:14px"></i> ¡Copiado!';
     setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:14px"></i> Copiar', 2000);
@@ -938,6 +922,7 @@ Ticket[ ${ticket} ]`;
   if (preEl) preEl.textContent = pre;
   if (popEl) popEl.textContent = popup;
   if (postEl) postEl.textContent = post;
+  updateRemarkBtns();
 }
 
 function updateSupRemarks() {
@@ -958,32 +943,34 @@ Ticket #${ticket}`;
   if (preEl)  preEl.textContent  = pre;
   if (flagEl) flagEl.textContent = flag;
   if (postEl) postEl.textContent = post;
+  updateRemarkBtns();
+}
+
+function updateRemarkBtns() {
+  const ticketAct = document.getElementById('t-act').value.trim();
+  const ticketSup = document.getElementById('t-sup').value.trim();
+  const allChecked = document.querySelectorAll('#dato-checks-full input:checked, #dato-checks-simple input:checked');
+  const hasDato = allChecked.length > 0;
+
+  // Remarks de actualización — necesitan ticket Y dato
+  ['remark-pre','remark-popup','remark-post'].forEach(id => {
+    const disabled = !ticketAct || !hasDato;
+    // Botones en vista ampliada (copy-btn-sm)
+    document.querySelectorAll(`button[onclick="copyRemark('${id}',this)"]`).forEach(b => b.disabled = disabled);
+    // Botones en vista simple
+    document.querySelectorAll(`button[onclick="copySimple('${id}',this)"]`).forEach(b => b.disabled = disabled);
+  });
+
+  // Remarks de supresión — solo necesitan ticket
+  ['sup-remark-pre','sup-remark-flag','sup-remark-post'].forEach(id => {
+    const disabled = !ticketSup;
+    document.querySelectorAll(`button[onclick="copyRemark('${id}',this)"]`).forEach(b => b.disabled = disabled);
+    document.querySelectorAll(`button[onclick="copySimple('${id}',this)"]`).forEach(b => b.disabled = disabled);
+  });
 }
 
 function copyRemark(elId, btn) {
-  // Verificar ticket según tipo de remark
-  const isAct = ['remark-pre','remark-popup','remark-post'].includes(elId);
-  const isSup = ['sup-remark-pre','sup-remark-flag','sup-remark-post'].includes(elId);
-  const ticket = isAct
-    ? document.getElementById('t-act').value.trim()
-    : document.getElementById('t-sup').value.trim();
-
-  if (!ticket) {
-    btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:12px"></i> Falta ticket';
-    setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:12px"></i> Copiar', 2000);
-    return;
-  }
-
-  // Para remarks de actualización, verificar que haya dato seleccionado
-  if (isAct) {
-    const dato = getDato();
-    if (dato === 'Correo electrónico' && document.querySelectorAll('#dato-checks-full input:checked, #dato-checks-simple input:checked').length === 0) {
-      btn.innerHTML = '<i class="ti ti-alert-circle" style="font-size:12px"></i> Marca el dato';
-      setTimeout(() => btn.innerHTML = '<i class="ti ti-copy" style="font-size:12px"></i> Copiar', 2000);
-      return;
-    }
-  }
-
+  if (btn.disabled) return;
   const el = document.getElementById(elId);
   if (!el) return;
   navigator.clipboard.writeText(el.textContent.trim()).then(() => {
@@ -1033,6 +1020,7 @@ Object.entries(PROTO).forEach(([id, items]) => renderProto(id, items));
 updateAll();
 updateSupRemarks();
 renderSeniorView();
+updateRemarkBtns();
 </script>
 </body>
 </html>
