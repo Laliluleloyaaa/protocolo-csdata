@@ -398,7 +398,7 @@
       <div class="reminder-card senior-only" id="rcard-sup-2">
         <div class="rem-card-header">
           <i class="ti ti-clock" style="font-size:16px;color:var(--t2)"></i>
-          <span class="rem-card-title">Reminder — segundo aviso</span>
+          <span class="rem-card-title">Reminder — CERRAR TICKET</span>
           <span class="rem-tag conditional"><i class="ti ti-alert-triangle" style="font-size:11px"></i> Sin respuesta del usuario</span>
           <button class="copy-btn" id="rcopy-sup-2" onclick="copyR('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:13px"></i> Copiar</button>
         </div>
@@ -450,7 +450,7 @@
         </button>
       </div>
       <div class="simple-card senior-only" id="simple-sup-r2">
-        <div><div class="simple-card-title" id="ssub-sup-2">Reminder — segundo aviso</div><div class="simple-card-sub" id="date-ssub-sup-2"></div></div>
+        <div><div class="simple-card-title" id="ssub-sup-2">Reminder — CERRAR TICKET</div><div class="simple-card-sub" id="date-ssub-sup-2"></div></div>
         <button class="simple-btn" id="scopy-sup-2" onclick="copySimple('rtext-sup-2',this)"><i class="ti ti-copy" style="font-size:14px"></i> Copiar</button>
       </div>
       <div class="senior-only" style="display:none">
@@ -582,9 +582,9 @@ function renderSimpleReminders() {
 
   // Título con plazo incluido según país
   const supLabels = {
-    co: { r1: 'Reminder — primer aviso — 15 días',   r2: 'Reminder — segundo aviso — 15 días' },
-    mx: { r1: 'Reminder — primer aviso — 5 días',    r2: 'Reminder — segundo aviso — 10 días' },
-    pe: { r1: 'Reminder — primer aviso — 3 días hábiles', r2: 'Reminder — segundo aviso — 7 días' },
+    co: { r1: 'Reminder — primer aviso — 15 días',   r2: 'Reminder — CERRAR TICKET — 15 días' },
+    mx: { r1: 'Reminder — primer aviso — 5 días',    r2: 'Reminder — CERRAR TICKET — 10 días' },
+    pe: { r1: 'Reminder — primer aviso — 3 días hábiles', r2: 'Reminder — CERRAR TICKET — 7 días' },
   };
   const c = country['sup'];
   const lbl = supLabels[c] || supLabels['co'];
@@ -627,9 +627,9 @@ function renderSeniorView() {
 
   // SUPRESIÓN — actualizar título del segundo reminder con plazo
   const supLabels = {
-    co: 'Reminder — segundo aviso — 15 días',
-    mx: 'Reminder — segundo aviso — 10 días',
-    pe: 'Reminder — segundo aviso — 7 días',
+    co: 'Reminder — CERRAR TICKET — 15 días',
+    mx: 'Reminder — CERRAR TICKET — 10 días',
+    pe: 'Reminder — CERRAR TICKET — 7 días',
   };
   const cs = country['sup'];
   const seniorSub2 = document.getElementById('senior-ssub-sup-2');
@@ -870,9 +870,9 @@ const RDEFS = {
   'sup-2': {
     tab:'sup',
     rules:{
-      co:{ days:15, type:'cal', flag:':col:',     sfx:'Segundo aviso' },
-      mx:{ days:10, type:'cal', flag:':flag-mx:', sfx:'Segundo aviso' },
-      pe:{ days:7,  type:'cal', flag:':peruu:',   sfx:'Segundo aviso' },
+      co:{ days:15, type:'cal', flag:':col:',     sfx:'CERRAR TICKET' },
+      mx:{ days:10, type:'cal', flag:':flag-mx:', sfx:'CERRAR TICKET' },
+      pe:{ days:7,  type:'cal', flag:':peruu:',   sfx:'CERRAR TICKET' },
     },
     tpl:(t,f,ds,s,c)=>`/remind ${getChannel()}${c==='pe'?' Tools':''} Ticket #${t} SUPRESIÓN ${f} Pending | ${s} at 07:00AM on ${ds}`
   },
