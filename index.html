@@ -506,26 +506,22 @@ function setView(v) {
 }
 
 function getDato() {
-  // Lee checkboxes de la vista activa
-  const fullChecks = document.querySelectorAll('#dato-checks-full input:checked');
-  const simpleChecks = document.querySelectorAll('#dato-checks-simple input:checked');
-  const checks = fullChecks.length > 0 ? fullChecks : simpleChecks;
-  const vals = [...checks].map(c => c.value);
-  return vals.length > 0 ? vals.join(', ') : 'Correo electrónico';
+  // Siempre leer del grupo full (ambos grupos se sincronizan hacia full)
+  const checks = document.querySelectorAll('#dato-checks-full input:checked');
+  return [...checks].map(c => c.value).join(', ');
 }
 
 function syncDatoSimple() {
-  // Sincronizar checkboxes entre vistas
+  // Sincronizar checkboxes de simple hacia full
   const simpleChecks = document.querySelectorAll('#dato-checks-simple input');
   simpleChecks.forEach(sc => {
     const fc = document.querySelector(`#dato-checks-full input[value="${sc.value}"]`);
     if (fc) fc.checked = sc.checked;
   });
   updateRemarks();
-  updateSupRemarks();
+  updateRemarkBtns();
   renderSimpleView();
   renderSeniorView();
-  updateRemarkBtns();
 }
 
 function syncDatoFull() {
@@ -534,6 +530,7 @@ function syncDatoFull() {
     const sc = document.querySelector(`#dato-checks-simple input[value="${fc.value}"]`);
     if (sc) sc.checked = fc.checked;
   });
+  updateRemarkBtns();
 }
 
 function renderSimpleView() {
@@ -645,6 +642,9 @@ function renderSeniorView() {
 function renderSimpleRemarks() {
   const el = document.getElementById('simple-rem-remarks');
   if (!el) return;
+  const ticketAct = document.getElementById('t-act').value.trim();
+  const hasDato = document.querySelectorAll('#dato-checks-full input:checked').length > 0;
+  const disabled = !ticketAct || !hasDato;
   const items = [
     { id: 'remark-pre',   label: 'Remark previo' },
     { id: 'remark-popup', label: 'Nota pop-up' },
@@ -655,7 +655,7 @@ function renderSimpleRemarks() {
       <div>
         <div class="simple-card-title">${item.label}</div>
       </div>
-      <button class="simple-btn remark-s" onclick="copySimple('${item.id}',this)">
+      <button class="simple-btn remark-s" ${disabled ? 'disabled' : ''} onclick="copySimple('${item.id}',this)">
         <i class="ti ti-copy" style="font-size:14px"></i> Copiar
       </button>
     </div>`).join('');
@@ -924,7 +924,7 @@ function updateAll() {
 
 function updateRemarks() {
   const ticket = document.getElementById('t-act').value.trim() || 'XXXXX';
-  const dato = getDato();
+  const dato = getDato(); // vacío si no hay dato marcado
   const pre = `-"Reclamación en trámite"
 -Actualización de datos: ${dato}
 -"Código 601 - CONTRA EL RESPONSABLE - RESPECTO DE LA ACTUALIZACIÓN DE LA INFORMACIÓN - Actualizar oportunamente la información en las bases de datos"
@@ -942,6 +942,7 @@ function updateRemarks() {
   if (popEl) popEl.textContent = popup;
   if (postEl) postEl.textContent = post;
   updateRemarkBtns();
+  renderSimpleRemarks();
 }
 
 function updateSupRemarks() {
@@ -968,8 +969,7 @@ Suprimir la información una vez se cumpla la finalidad de la recolección
 function updateRemarkBtns() {
   const ticketAct = document.getElementById('t-act').value.trim();
   const ticketSup = document.getElementById('t-sup').value.trim();
-  const allChecked = document.querySelectorAll('#dato-checks-full input:checked, #dato-checks-simple input:checked');
-  const hasDato = allChecked.length > 0;
+  const hasDato = document.querySelectorAll('#dato-checks-full input:checked').length > 0;
 
   // Remarks de actualización — necesitan ticket Y dato
   ['remark-pre','remark-popup','remark-post'].forEach(id => {
@@ -986,6 +986,8 @@ function updateRemarkBtns() {
     document.querySelectorAll(`button[onclick="copyRemark('${id}',this)"]`).forEach(b => b.disabled = disabled);
     document.querySelectorAll(`button[onclick="copySimple('${id}',this)"]`).forEach(b => b.disabled = disabled);
   });
+  // Re-renderizar remarks simples para aplicar disabled
+  renderSimpleRemarks();
 }
 
 function copyRemark(elId, btn) {
