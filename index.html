@@ -67,6 +67,7 @@
   .country-bar{display:flex;gap:6px;margin-bottom:20px;}
   .cbtn{background:var(--bg2);border:1px solid var(--bd2);border-radius:8px;color:var(--t2);cursor:pointer;font-size:16px;padding:12px 26px;transition:all .2s;font-weight:500;}
   .cbtn:hover:not(.active){border-color:var(--bd2);color:var(--t1);background:var(--bg3);}
+  .flag-emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-style:normal;}
   .cbtn.active{border-color:var(--i-bd);color:var(--i-t);background:var(--i-bg);box-shadow:0 2px 8px rgba(79,142,247,.15);}
 
   .reminder-card{background:var(--bg2);border:1px solid var(--bd2);border-radius:10px;margin-bottom:12px;overflow:hidden;transition:border-color .2s;}
@@ -263,9 +264,9 @@
       <div class="field-group"><label>Fecha actual</label><input type="date" class="date-in" id="d-act" oninput="updateAll()"></div>
     </div>
     <div class="country-bar">
-      <button class="cbtn active" onclick="setCountry('act','co',this)">🇨🇴 Colombia</button>
-      <button class="cbtn" onclick="setCountry('act','mx',this)">🇲🇽 México</button>
-      <button class="cbtn" onclick="setCountry('act','pe',this)">🇵🇪 Perú</button>
+      <button class="cbtn active" onclick="setCountry('act','co',this)"><span class="flag-emoji">🇨🇴</span> Colombia</button>
+      <button class="cbtn" onclick="setCountry('act','mx',this)"><span class="flag-emoji">🇲🇽</span> México</button>
+      <button class="cbtn" onclick="setCountry('act','pe',this)"><span class="flag-emoji">🇵🇪</span> Perú</button>
     </div>
 
     <!-- VISTA AMPLIADA -->
@@ -374,9 +375,9 @@
       <div class="field-group"><label>Fecha actual</label><input type="date" class="date-in" id="d-sup" oninput="updateAll()"></div>
     </div>
     <div class="country-bar">
-      <button class="cbtn active" onclick="setCountry('sup','co',this)">🇨🇴 Colombia</button>
-      <button class="cbtn" onclick="setCountry('sup','mx',this)">🇲🇽 México</button>
-      <button class="cbtn" onclick="setCountry('sup','pe',this)">🇵🇪 Perú</button>
+      <button class="cbtn active" onclick="setCountry('sup','co',this)"><span class="flag-emoji">🇨🇴</span> Colombia</button>
+      <button class="cbtn" onclick="setCountry('sup','mx',this)"><span class="flag-emoji">🇲🇽</span> México</button>
+      <button class="cbtn" onclick="setCountry('sup','pe',this)"><span class="flag-emoji">🇵🇪</span> Perú</button>
     </div>
 
     <!-- VISTA AMPLIADA SUP -->
